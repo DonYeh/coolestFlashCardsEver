@@ -1,13 +1,14 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import './App.css';
+import './deck.css';
 import { deleteDeck } from './api/deleteDecks';
 import { createDeck } from './api/createDeck';
 import { getDecks, TDeck } from './api/getDecks';
 import { createCard } from './api/createCard';
 import { useParams } from 'react-router-dom';
 import { getDeck } from './api/getDeck';
+import { deleteCard } from './api/deleteCard';
 
 export default function Deck() {
 
@@ -23,10 +24,13 @@ export default function Deck() {
     setText("");
   }
 
-//   async function handleDeleteCard(cardId: string) {
-//     await deleteCard(cardId)
-//     setCards(cards.filter((card)=> card._id !== cardId));
-//   }
+  async function handleDeleteCard(cardId: number) {
+    if(!deckId) return;
+    const newDeck = await deleteCard(deckId, cardId)
+    setCards(newDeck.cards);
+        
+        // cards.filter((card)=> card._id !== cardId));
+  }
 
   useEffect(() => {
       async function fetchDeck() {
@@ -41,11 +45,11 @@ export default function Deck() {
   }, [deckId]);
 
   return (
-    <div className="App">
-      <ul className="decks">
-        {cards.map((card)=> <li key={card}>
+    <div className="deck">
+      <ul className="cards">
+        {cards.map((card, cardId)=> <li key={cardId}>
           
-          {/* <button onClick={()=> handleDeleteCard(card._id)}>X</button> */}
+          <button onClick={()=> handleDeleteCard(cardId)}>X</button>
           {/* <Link to={`decks/${deck._id}`}>{deck.title}</Link> */}
           {card}
           </li>)}
