@@ -19,6 +19,12 @@ app.get('/', (req: Request,res: Response)=> {
     res.send("hellooo");
 });
 
+app.get('/decks', async (req: Request,res: Response)=> {
+    const decks = await Deck.find();
+    console.log(decks)
+    res.json(decks);
+})
+
 app.post('/decks', async (req: Request,res: Response)=> {
     console.log(req.body);
     // res.send("hello world");
