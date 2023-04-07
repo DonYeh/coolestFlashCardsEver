@@ -3,13 +3,15 @@ config();
 
 import express, {Request, Response} from "express";
 import mongoose from "mongoose";
-
+import cors from "cors";
 
 import Deck from './models/Deck';
 
 const PORT = 5000;
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
