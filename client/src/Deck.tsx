@@ -13,15 +13,19 @@ import { deleteCard } from './api/deleteCard';
 export default function Deck() {
 
   const [deck,setDeck] = useState<TDeck | undefined>()
-  const [cards, setCards] = useState<string[]>([]);
-  const [text, setText] = useState<string>('')
+  const [cards, setCards] = useState<object[]>([]);
+  const [text, setText] = useState<string>('');
+  const [definition, setDefinition] = useState<string>('');
   const { deckId } = useParams();
 
   async function handleCreateCard(e: React.FormEvent) {
     e.preventDefault();
-    const { cards: serverCards } = await createCard(deckId!, text)
+    const { cards: serverCards } = await createCard(deckId!, text, definition)
+    console.log('inside handleCreateCard', cards )
     setCards(serverCards)
     setText("");
+    setDefinition("");
+
   }
 
   async function handleDeleteCard(cardId: number) {
@@ -44,16 +48,23 @@ export default function Deck() {
  
   }, [deckId]);
 
+  //TODO: 
+  // 1. add flip card button and animation to card, put title on front, definition on back
+  // 2. add study mode that displays the title + definition and quiz mode that separates title/definition on front/back
+  // 3. themes - light/dark mode
+  // 4. stretch goals: upload picture/sound to definitions, could possibly pull images from some API/AI
+
   return (
     <div className="deck">
+      <h1>{deck?.title}</h1>
       <ul className="cards">
-        {cards.map((card, cardId)=> <li key={cardId}>
+        {cards.map((card, cardId) => <li key={cardId}>
           
           <button onClick={()=> handleDeleteCard(cardId)}>X</button>
-          {/* <Link to={`decks/${deck._id}`}>{deck.title}</Link> */}
-          {card}
+          {card.text}{card.definition}
           </li>)}
       </ul>
+          {/* <Link to={`decks/${deck._id}`}>{deck.title}</Link> */}
 
       <form onSubmit={handleCreateCard}>
         <label htmlFor="card-text">Card Text</label>
@@ -61,6 +72,11 @@ export default function Deck() {
           value={text}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
         />
+        <label htmlFor="card-definition">Card Definition</label>
+        <input id="card-definition" 
+        value={definition}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDefinition(e.target.value)}
+      />
         <button>Create Card</button>
       </form>
     </div>

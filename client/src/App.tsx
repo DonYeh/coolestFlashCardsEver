@@ -26,7 +26,7 @@ function App() {
     async function fetchDecks() {
       const newDecks = await getDecks();
       setDecks(newDecks);
-      console.log(newDecks);
+      console.log('App.tsx useEffect', newDecks);
     }
     fetchDecks();
  
@@ -34,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Decks</h1>
       <ul className="decks">
         {decks.map((deck)=> <li key={deck._id}>
           {/*TODO: hide the X button until you hover over the card*/}
