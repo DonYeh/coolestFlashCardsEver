@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import './deck.css';
 import { deleteDeck } from './api/deleteDecks';
@@ -9,7 +9,7 @@ import { createCard } from './api/createCard';
 import { useParams } from 'react-router-dom';
 import { getDeck } from './api/getDeck';
 import { deleteCard } from './api/deleteCard';
-
+import Card from './Card';
 import { Switch, SwitchProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -24,17 +24,21 @@ export default function Deck() {
     quiz = 'quiz',
   }
 
+  interface flippedCardStatus {
+    [key: string]: boolean;
+  }
+
   const [deck,setDeck] = useState<TDeck | undefined>()
   const [cards, setCards] = useState<object[]>([]);
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
   const [mode, setMode] = useState<switchMode>(switchMode.quiz)
+  const [flip, setFlip] = useState<boolean>(false)
+  const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
-  // enum switchMode {
-  //   quiz = '1',
-  //   study = '0',
-  // }
+  const cardFront = useRef<HTMLInputElement>(null);
+  const cardBack = useRef<HTMLInputElement>(null);
 
   async function handleCreateCard(e: React.FormEvent) {
     e.preventDefault();
@@ -49,9 +53,7 @@ export default function Deck() {
   async function handleDeleteCard(cardId: number) {
     if(!deckId) return;
     const newDeck = await deleteCard(deckId, cardId)
-    setCards(newDeck.cards);
-        
-        // cards.filter((card)=> card._id !== cardId));
+    setCards(newDeck.cards);        
   }
 
 
@@ -98,13 +100,11 @@ export default function Deck() {
   }));
 
   const handleSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log('e.target.value', e.target.value)
-    console.log('e.target.checked', e.target.checked)
-    const { value, checked } = e.target;
     mode == switchMode.study ? setMode(switchMode.quiz) : setMode(switchMode.study)
-    console.log('mode', mode)
-    // setMode('quiz')
-    // setMode('study')
+  }
+
+  const handleFlip = (cardId: number) => {
+    setFlippedCard(state => ({...state, [cardId]: !state[cardId]}))
   }
 
   useEffect(() => {
@@ -129,13 +129,35 @@ export default function Deck() {
     <div className="deck">
       <h1>{deck?.title}</h1>
       <ul className="cards">
-        {cards.map((card, cardId) => <li key={cardId}>
+        {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
+            <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>
           
-          <button onClick={()=> handleDeleteCard(cardId)}>X</button>
-          {card.text}{card.definition}
-          </li>)}
+          <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
+            <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
+            {switchMode.study ? 
+              <>
+                <div className="text">
+                  {card.text}
+                </div>
+                <div className="definition">
+                  {mode == switchMode.quiz ? card.definition : ''}
+                </div>
+              </>
+              :
+              <div className="text">
+                {card.text}
+              </div> 
+            }
+            </div>
+            
+            <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
+              <div className="cardBack">
+                {card.definition}
+              </div>
+            </div>
+          </div>
+        </li>)}
       </ul>
-          {/* <Link to={`decks/${deck._id}`}>{deck.title}</Link> */}
 
       <form onSubmit={handleCreateCard}>
         <label htmlFor="card-text">Card Text</label>
@@ -152,7 +174,6 @@ export default function Deck() {
       </form>
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography>Study</Typography>
-        {/* <AntSwitch  inputProps={{ 'aria-label': 'ant design' }} /> */}
         <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleSwitch} checked={mode == 'study' ? true : false}/>
         <Typography>Quiz</Typography>
       </Stack>

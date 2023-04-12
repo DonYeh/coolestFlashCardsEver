@@ -25,7 +25,7 @@
   grid-template-columns: repeat(3,1fr);
   }
   
-  .cards li {
+  .cards li { 
     position: relative;
     display: flex;
     justify-content: center;
@@ -35,17 +35,83 @@
     background: black;
     border: 1px solid white;
     border-radius: 10px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
+    transform-style: preserve-3d;
+    transition: 150ms;
+    transform: rotateY(var(--rotate-y, 0));
   }
   
   .cards li button {
+    /* position: absolute; */
     position: absolute;
     font-size: 10px;
     top: 5px;
     right: 5px;
     background: grey;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+  }
+
+  .cards li button.flip {
+    position: absolute;
+    top: 5px;
+    right: 153px; /* can't use the left position or else it stretches the box */
+    transform-style: preserve-3d;
+    /* background: pink; */
   }
   
   .cards li:hover {
     background: rgba(0,0,0,.8);
     cursor:pointer;
   }
+
+.card {
+  /* background: purple; */
+  position: relative;
+  /* transform-style: preserve-3d;
+  transition: 150ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)); */
+}
+
+  .card.flip {
+    position: relative;
+    --rotate-y: 180deg;
+    transform-style: preserve-3d;
+
+
+  }
+
+
+  .card .front,
+  .card .back {
+    /* position: absolute; */
+    /*padding: 1rem; */
+    backface-visibility: hidden;
+  }
+
+  .card .back {
+    transform: rotateY(180deg);
+    /* background: orange; */
+  }
+
+   .cardDiv {
+    /* background: purple; */
+    transform-style: preserve-3d;
+    transition: 150ms;
+    /* transform: rotateY(var(--rotate-y, 0)); */
+   }
+
+   .cardBack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .front.hidden {
+    display: none;
+   }
+
+   .back.hidden {
+    display: none;
+   }
+  
