@@ -3,8 +3,8 @@ import { API_URL } from "./config";
 export type TDeck = {
     title: string;
     // cards: string[];
-    // cards: [{text: string, definition: string}];
-    cards: object[];
+    cards: [{text: string, definition: string}];
+    // cards: object[];
     _id: string;
   }
 

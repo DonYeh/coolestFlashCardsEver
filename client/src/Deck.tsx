@@ -33,7 +33,6 @@ export default function Deck() {
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
   const [mode, setMode] = useState<switchMode>(switchMode.quiz)
-  const [flip, setFlip] = useState<boolean>(false)
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
@@ -121,13 +120,19 @@ export default function Deck() {
 
   //TODO: 
   // 1. add flip card button and animation to card, put title on front, definition on back
-  // 2. add study mode that displays the title + definition and quiz mode that separates title/definition on front/back
+  // 2. add study mode that displays the title + definition and quiz mode that separates title/definition on front/
+  //    back
+  // fix the close button issue when clicking the X button, it flips the card then closes. Need to isolate the    
+  //   click event
+  // research mobile device detection. If on a desktop, add onHover events that only show the X button on hover. 
+  // add styling to the decks
+  // add header 
+  // add carousel mode 
   // 3. themes - light/dark mode
   // 4. stretch goals: upload picture/sound to definitions, could possibly pull images from some API/AI
 
   return (
     <div className="deck">
-      <h1>{deck?.title}</h1>
       <ul className="cards">
         {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
             <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>

@@ -9,23 +9,26 @@ import {
 import "./index.css";
 import { Header } from './Header';
 import Deck from './Deck';
+import Layout from './Layout';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/decks/:deckId",
-    element: <Deck />,
-  },
+    element: <Layout/>,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/decks/:deckId",
+        element: <Deck />,
+      },
+    ]
+  }
 ]);
-
-//TODO: create header with 3 sections: left section(logo), middle section(decks), right section(login)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Header/>
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
