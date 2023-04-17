@@ -31,8 +31,8 @@ export function Header({decks}: {decks:TDeck}){
         <Box sx={{ flexGrow: 1 }}>
         <AppBar className="appbar">
             <Toolbar className="toolbar">
-                <Link to="/" style={{color: 'white'}}>CoolestFlashCardsEver</Link>
-                <FormControl fullWidth>
+                <Link to="/" style={{color: 'black'}}>CoolestFlashCardsEver</Link>
+                <FormControl sx={{width: '30%'}}>
                     <InputLabel id="demo-simple-select-label">Decks</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"

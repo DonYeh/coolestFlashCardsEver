@@ -38,7 +38,7 @@
     box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
     transform-style: preserve-3d;
     transition: 150ms;
-    transform: rotateY(var(--rotate-y, 0));
+    transform: rotateY(var(--rotate-y, 0)) translateY(var(--translate-y,0));
   }
   
   .cards li button {
@@ -63,6 +63,10 @@
   .cards li:hover {
     background: rgba(0,0,0,.8);
     cursor:pointer;
+    --translate-y: -2px;
+    box-shadow: 0 0 5px 2px rgba (0,0,0,.9);
+
+
   }
 
 .card {

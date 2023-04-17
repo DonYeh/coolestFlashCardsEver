@@ -6,6 +6,7 @@
 .toolbar {
     display: flex;
     justify-content: space-between;
+    color: black;
 }
 
 .decks {

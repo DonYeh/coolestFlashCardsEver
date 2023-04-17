@@ -24,6 +24,11 @@ export default function Deck() {
     quiz = 'quiz',
   }
 
+  enum switchView {
+    grid = 'grid',
+    carousel = 'carousel'
+  }
+
   interface flippedCardStatus {
     [key: string]: boolean;
   }
@@ -33,6 +38,7 @@ export default function Deck() {
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
   const [mode, setMode] = useState<switchMode>(switchMode.quiz)
+  const [view, setView] = useState<switchView>(switchView.grid)
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
@@ -98,13 +104,19 @@ export default function Deck() {
     },
   }));
 
-  const handleSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleModeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
     mode == switchMode.study ? setMode(switchMode.quiz) : setMode(switchMode.study)
+  }
+
+  const handleViewSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    view == switchView.grid ? setView(switchView.carousel) : setView(switchView.grid)
   }
 
   const handleFlip = (cardId: number) => {
     setFlippedCard(state => ({...state, [cardId]: !state[cardId]}))
   }
+
+  console.log('view', view)
 
   useEffect(() => {
       async function fetchDeck() {
@@ -179,8 +191,13 @@ export default function Deck() {
       </form>
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography>Study</Typography>
-        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleSwitch} checked={mode == 'study' ? true : false}/>
+        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? true : false}/>
         <Typography>Quiz</Typography>
+      </Stack>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Typography>Grid</Typography>
+        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleViewSwitch} checked={view == 'carousel' ? true : false}/>
+        <Typography>Carousel</Typography>
       </Stack>
     </div>
   )
