@@ -1,14 +1,21 @@
 import { useState } from "react";
 import './cardslider.css'
 import Typography from '@mui/material/Typography';
+import Card from './Card';
 
 const slideStyles = {
     width: "100%",
     height: "100%",
+    display: "flex",
+    justifyContent: "center",
     borderRadius: "10px",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+ 
   };
+
+  const cardStyle = {
+    width: "600px",
+    height: "400px",
+  }
   
   const rightArrowStyles = {
     position: "absolute",
@@ -18,7 +25,7 @@ const slideStyles = {
     fontSize: "45px",
     color: "#000",
     zIndex: 1,
-    cursorre: "pointer",
+    cursor: "pointer",
   };
   
   const leftArrowStyles = {
@@ -44,7 +51,7 @@ const slideStyles = {
   
 
 
-function CardSlider({cards, mode, flippedCard, switchMode, cardFront, cardBack}) {
+function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handleDeleteCard, mode, view}) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const goToPrevious = () => {
       const isFirstSlide = currentIndex === 0;
@@ -59,11 +66,9 @@ function CardSlider({cards, mode, flippedCard, switchMode, cardFront, cardBack})
     const goToSlide = (cardIndex) => {
       setCurrentIndex(cardIndex);
     };
-    const slideStylesWidthBackground = {
-      ...slideStyles,
-      backgroundImage: `url(${cards[currentIndex].text})`,
-    };
+ 
     console.log('inside cardSlider, cards: ', cards)
+    console.log('inside cardSlider, cards ID: ', cards[currentIndex]._id)
     console.log('inside cardSlider, currentIndex: ', currentIndex)
   
     return (
@@ -76,52 +81,20 @@ function CardSlider({cards, mode, flippedCard, switchMode, cardFront, cardBack})
             ❱
           </div>
         </div>
-        <div style={slideStylesWidthBackground}>
-            {/* <ul className="cards">
-        {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
-              <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>
-            
-            <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
-              <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
-              {mode == 'study' ? 
-                <>
-                  <div className="text">
-                    {card.text}
-                  </div>
-                  <div className="definition">
-                    {mode == 'study' ? card.definition : ''}
-                  </div>
-                </>
-                :
-                <div className="text">
-                  {card.text}
-                </div> 
-              }
-              </div>
-              
-              <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
-                <div className="cardBack">
-                  {card.definition}
-                </div>
-              </div>
-            </div>
-          </li>)}
-          </ul> */}
-        { mode == 'study' ?
-            <>
-                <div>
-                    {cards[currentIndex].text}
-                </div>
-                <div>
-                    {cards[currentIndex].definition}
-                </div>
-            </>
-            :
-            <div>
-                {cards[currentIndex].text}
-            </div>
-        }        
-    </div>
+        <div style={slideStyles}>        
+            <Card 
+                card={cards[currentIndex]}
+                cardBack={cardBack} 
+                cardFront={cardFront}
+                cardId={cards[currentIndex]._id} 
+                flippedCard={flippedCard} 
+                //why does handleDeleteCard not work in carousel view????
+                handleDeleteCard={handleDeleteCard} 
+                handleFlip={handleFlip} 
+                mode={mode}
+                view={view}
+            />
+        </div>
         <div style={dotsContainerStyles}>
           {cards.map((card, cardIndex) => (
             <div

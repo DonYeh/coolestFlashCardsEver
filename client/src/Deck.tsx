@@ -10,13 +10,13 @@ import { useParams } from 'react-router-dom';
 import { getDeck } from './api/getDeck';
 import { deleteCard } from './api/deleteCard';
 import Card from './Card';
+import CardSlider from './CardSlider'
 import { Switch, SwitchProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import CardSlider from './CardSlider'
 
 export default function Deck() {
 
@@ -43,8 +43,8 @@ export default function Deck() {
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
-  const cardFront = useRef<HTMLInputElement>(null);
   const cardBack = useRef<HTMLInputElement>(null);
+  const cardFront = useRef<HTMLInputElement>(null);
 
   async function handleCreateCard(e: React.FormEvent) {
     e.preventDefault();
@@ -57,7 +57,10 @@ export default function Deck() {
   }
 
   async function handleDeleteCard(cardId: number) {
-    if(!deckId) return;
+
+    if(!deckId){ console.log('no deckID'); return} ;
+    console.log('inside handleDeleteCard, X button clicked')
+    // if(!deckId || !cardId) return;
     const newDeck = await deleteCard(deckId, cardId)
     setCards(newDeck.cards);        
   }
@@ -153,19 +156,30 @@ export default function Deck() {
         <ul className="cards">
           {cards.map((card, cardId) => 
             <li key={cardId}>
-                <Card card={card} 
+                <Card 
+                  card={card}
+                  cardBack={cardBack} 
+                  cardFront={cardFront}
                   cardId={cardId} 
                   flippedCard={flippedCard} 
-                  cardFront={cardFront} 
-                  cardBack={cardBack} 
-                  handleFlip={handleFlip} 
                   handleDeleteCard={handleDeleteCard} 
+                  handleFlip={handleFlip} 
                   mode={mode}
+                  view={view}
                 />
             </li>)}
         </ul> 
         :
-        <CardSlider cards={cards} mode={mode} flippedCard={flippedCard} switchMode={switchMode} cardFront={cardFront} cardBack={cardBack} />
+        <CardSlider 
+          cards={cards}
+          cardBack={cardBack} 
+          cardFront={cardFront} 
+          flippedCard={flippedCard}  
+          handleFlip={handleFlip} 
+          handleDeleteCard={handleDeleteCard} 
+          mode={mode} 
+          view={view}
+        />
       }
 
       <form onSubmit={handleCreateCard}>
