@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import CardSlider from './CardSlider'
 
 export default function Deck() {
 
@@ -37,7 +38,7 @@ export default function Deck() {
   const [cards, setCards] = useState<object[]>([]);
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
-  const [mode, setMode] = useState<switchMode>(switchMode.quiz)
+  const [mode, setMode] = useState<switchMode>(switchMode.study)
   const [view, setView] = useState<switchView>(switchView.grid)
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
@@ -117,6 +118,7 @@ export default function Deck() {
   }
 
   console.log('view', view)
+  console.log('cards in Deck', cards)
 
   useEffect(() => {
       async function fetchDeck() {
@@ -145,36 +147,43 @@ export default function Deck() {
 
   return (
     <div className="deck">
-      <ul className="cards">
-        {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
-            <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>
-          
-          <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
-            <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
-            {switchMode.study ? 
-              <>
+      
+      {view == 'grid' ? 
+
+        <ul className="cards">
+          {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
+              <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>
+            
+            <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
+              <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
+              {mode == 'study' ? 
+                <>
+                  <div className="text">
+                    {card.text}
+                  </div>
+                  <div className="definition">
+                    {/* {mode == switchMode.study ? card.definition : ''} */}
+                    {card.definition}
+                  </div>
+                </>
+                :
                 <div className="text">
                   {card.text}
+                </div> 
+              }
+              </div>
+              
+              <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
+                <div className="cardBack">
+                  {card.definition}
                 </div>
-                <div className="definition">
-                  {mode == switchMode.quiz ? card.definition : ''}
-                </div>
-              </>
-              :
-              <div className="text">
-                {card.text}
-              </div> 
-            }
-            </div>
-            
-            <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
-              <div className="cardBack">
-                {card.definition}
               </div>
             </div>
-          </div>
-        </li>)}
-      </ul>
+          </li>)}
+        </ul> 
+        :
+        <CardSlider cards={cards} mode={mode} flippedCard={flippedCard} switchMode={switchMode} cardFront={cardFront} cardBack={cardBack}/>
+      }
 
       <form onSubmit={handleCreateCard}>
         <label htmlFor="card-text">Card Text</label>
@@ -191,7 +200,7 @@ export default function Deck() {
       </form>
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography>Study</Typography>
-        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? true : false}/>
+        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? false : true}/>
         <Typography>Quiz</Typography>
       </Stack>
       <Stack direction="row" spacing={1} alignItems="center">

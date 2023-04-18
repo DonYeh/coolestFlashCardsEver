@@ -1,0 +1,21 @@
+.dotStyle {
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 20px;
+    /* color: orange; */
+    color: #1976d2;
+   
+  };
+
+/* not sure why I need this in order for .active to work, but I do*/
+ .dotStyle.active {
+ }
+ 
+.active {
+  color:black;
+}
+
+
+  .dotStyle:hover {
+    color: lightskyblue;
+  }
