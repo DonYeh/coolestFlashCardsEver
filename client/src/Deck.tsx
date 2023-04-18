@@ -151,35 +151,38 @@ export default function Deck() {
       {view == 'grid' ? 
 
         <ul className="cards">
-          {cards.map((card, cardId) => <li key={cardId} className={`card ${flippedCard[cardId] ? 'flip' : ''}`} onClick={() => handleFlip(cardId)} >
-              <button className={`button ${flippedCard[cardId] ? 'flip' : ''}`} onClick={()=> handleDeleteCard(cardId)}>X</button>
-            
-            <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
-              <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
-              {mode == 'study' ? 
-                <>
-                  <div className="text">
-                    {card.text}
+          {cards.map((card, cardId) => 
+            <li key={cardId}>
+                <div className={`cardContainer ${flippedCard[cardId] ? 'flip' : ''}`}  
+                  onClick={() => handleFlip(cardId)} >
+                  <button className={`cardButton ${flippedCard[cardId] ? 'flip' : ''}`}     
+                    onClick={()=> handleDeleteCard(cardId)}>X</button>
+                  <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
+                    <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
+                      {mode == 'study' ? 
+                        <>
+                          <div className="text">
+                            {card.text}
+                          </div>
+                          <div className="definition">
+                            {/* {mode == switchMode.study ? card.definition : ''} */}
+                            {card.definition}
+                          </div>
+                        </>
+                        :
+                        <div className="text">
+                          {card.text}
+                        </div> 
+                      }
+                    </div>
+                    <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
+                      <div className="cardBack">
+                        {card.definition}
+                      </div>
+                    </div>
                   </div>
-                  <div className="definition">
-                    {/* {mode == switchMode.study ? card.definition : ''} */}
-                    {card.definition}
-                  </div>
-                </>
-                :
-                <div className="text">
-                  {card.text}
-                </div> 
-              }
-              </div>
-              
-              <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
-                <div className="cardBack">
-                  {card.definition}
                 </div>
-              </div>
-            </div>
-          </li>)}
+            </li>)}
         </ul> 
         :
         <CardSlider cards={cards} mode={mode} flippedCard={flippedCard} switchMode={switchMode} cardFront={cardFront} cardBack={cardBack}/>

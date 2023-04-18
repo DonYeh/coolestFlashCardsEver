@@ -24,8 +24,12 @@
   grid-gap: 10px;
   grid-template-columns: repeat(3,1fr);
   }
+
+  ul li::marker {
+    content: none;
+  }
   
-  .cards li { 
+  .cardContainer { 
     position: relative;
     display: flex;
     justify-content: center;
@@ -40,9 +44,30 @@
     transition: 150ms;
     transform: rotateY(var(--rotate-y, 0)) translateY(var(--translate-y,0));
   }
+
+  .cardContainer:hover {
+    background: rgba(0,0,0,.8);
+    cursor:pointer;
+    --translate-y: -2px;
+    box-shadow: 0 0 5px 2px rgba (0,0,0,.9);
+  }
+
+  .cardContainer.flip {
+    position: relative;
+    --rotate-y: 180deg;
+    transition: 200ms;
+  }
+
+  .cardContainer .front,
+  .cardContainer .back {
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   
-  .cards li button {
-    /* position: absolute; */
+  .cardButton {
     position: absolute;
     font-size: 10px;
     top: 5px;
@@ -52,70 +77,31 @@
     transform: rotateY(180deg);
   }
 
-  .cards li button.flip {
+  .cardButton.flip {
     position: absolute;
     top: 5px;
-    right: 153px; /* can't use the left position or else it stretches the box */
+    right: 153px;
     transform-style: preserve-3d;
-    /* background: pink; */
   }
   
-  .cards li:hover {
-    background: rgba(0,0,0,.8);
-    cursor:pointer;
-    --translate-y: -2px;
-    box-shadow: 0 0 5px 2px rgba (0,0,0,.9);
-
-
-  }
-
-.card {
-  /* background: purple; */
-  position: relative;
-  /* transform-style: preserve-3d;
-  transition: 150ms;
-  transform: perspective(1000px) rotateY(var(--rotate-y, 0)); */
-}
-
-  .card.flip {
-    position: relative;
-    --rotate-y: 180deg;
-    transform-style: preserve-3d;
-
-
-  }
-
-
-  .card .front,
-  .card .back {
-    /* position: absolute; */
-    /*padding: 1rem; */
-    backface-visibility: hidden;
-  }
-
-  .card .back {
-    transform: rotateY(180deg);
-    /* background: orange; */
-  }
-
    .cardDiv {
     /* background: purple; */
     transform-style: preserve-3d;
-    transition: 150ms;
-    /* transform: rotateY(var(--rotate-y, 0)); */
+    /* transition: 150ms; */
+    transform: rotateY(var(--rotate-y, 0));
+   }
+   .cardDiv.flip {
+    /* background: purple; */
+    transform-style: preserve-3d;
+    /* transition: 150ms; */
+    transform: rotateY(var(--rotate-y, 0));
+    position: relative;
+    --rotate-y: 180deg;
+    transform-style: preserve-3d;
    }
 
-   .cardBack {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   }
-
-   .front.hidden {
-    display: none;
-   }
-
+   .front.hidden,
    .back.hidden {
     display: none;
    }
-  
+
