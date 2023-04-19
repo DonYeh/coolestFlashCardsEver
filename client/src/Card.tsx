@@ -1,8 +1,19 @@
 import { useEffect, useState, useRef } from 'react';
+// import { flippedCardStatus } from './Deck';
 
+type CardProps = {
+    card: {text: string; definition: string; _id: number};
+    cardBack: {current: string};
+    cardFront: {current: string};
+    cardId: number;
+    flippedCard: {[cardId: number]: boolean};
+    handleDeleteCard: (cardId: number) => void;
+    handleFlip: (cardId: number) => void;
+    mode: string;
+    view: string;
+}
 
-
-export default function Card({ card, cardBack, cardFront, cardId, flippedCard, handleDeleteCard,handleFlip, mode, view }) {
+export default function Card({ card, cardBack, cardFront, cardId, flippedCard, handleDeleteCard, handleFlip, mode, view }: CardProps) {
 
     console.log('Card, view: ', view)
     console.log('Card, cardId: ', cardId)

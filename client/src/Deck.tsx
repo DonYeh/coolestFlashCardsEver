@@ -18,7 +18,13 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 
+
+
 export default function Deck() {
+  
+  type flippedCardStatus = {
+    [userId: number]: boolean;
+  }
 
   enum switchMode {
     study = 'study',
@@ -30,10 +36,6 @@ export default function Deck() {
     carousel = 'carousel'
   }
 
-  interface flippedCardStatus {
-    [key: string]: boolean;
-  }
-
   const [deck,setDeck] = useState<TDeck | undefined>()
   const [cards, setCards] = useState<object[]>([]);
   const [text, setText] = useState<string>('');
@@ -43,8 +45,8 @@ export default function Deck() {
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
-  const cardBack = useRef<HTMLInputElement>(null);
-  const cardFront = useRef<HTMLInputElement>(null);
+  const cardBack = useRef<HTMLDivElement>(null);
+  const cardFront = useRef<HTMLDivElement>(null);
 
   async function handleCreateCard(e: React.FormEvent) {
     e.preventDefault();
@@ -122,6 +124,7 @@ export default function Deck() {
 
   console.log('view', view)
   console.log('cards in Deck', cards)
+  console.log('Deck, cardFront: ', cardFront)
 
   useEffect(() => {
       async function fetchDeck() {

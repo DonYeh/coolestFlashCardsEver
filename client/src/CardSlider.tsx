@@ -49,9 +49,18 @@ const slideStyles = {
     justifyContent: "center",
   };
   
+  type CardSliderProps = {
+    cards: {text: string; definition: string; _id: number}[];
+    cardBack: {current: string};
+    cardFront: {current: string};
+    flippedCard: {[cardId: number]: boolean};
+    handleDeleteCard: (cardId: number) => void;
+    handleFlip: (cardId: number) => void;
+    mode: string;
+    view: string;
+}
 
-
-function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handleDeleteCard, mode, view}) {
+function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handleDeleteCard, mode, view}: CardSliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const goToPrevious = () => {
       const isFirstSlide = currentIndex === 0;
@@ -63,7 +72,7 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
     };
-    const goToSlide = (cardIndex) => {
+    const goToSlide = (cardIndex: number) => {
       setCurrentIndex(cardIndex);
     };
  
@@ -88,8 +97,9 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
                 cardFront={cardFront}
                 cardId={cards[currentIndex]._id} 
                 flippedCard={flippedCard} 
-                //why does handleDeleteCard not work in carousel view????
-                handleDeleteCard={handleDeleteCard} 
+                //why does handleDeleteCard not work in carousel view???? 
+
+                handleDeleteCard={handleDeleteCard}
                 handleFlip={handleFlip} 
                 mode={mode}
                 view={view}
