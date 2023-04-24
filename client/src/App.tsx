@@ -4,7 +4,7 @@ import './App.scss';
 import { deleteDeck } from './api/deleteDecks';
 import { createDeck } from './api/createDeck';
 import { getDecks, TDeck } from './api/getDecks';
-
+import TextField from '@mui/material/TextField';
 
 function App() {
   const [decks, setDecks] = useState<TDeck[]>([]);
@@ -44,11 +44,13 @@ function App() {
       </ul>
 
       <form className="App__form"onSubmit={handleCreateDeck}>
-        <label htmlFor="deck-title">Deck Title</label>
-        <input id="deck-title" 
+        {/* <label htmlFor="deck-title">Deck Title</label> */}
+        {/* <input id="deck-title" 
           value={title}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-        />
+        /> */}
+        <TextField id="outlined-basic" label="Deck Title" variant="outlined" value={title}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}/>
         <button>Create Deck</button>
       </form>
     </div>
