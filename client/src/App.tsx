@@ -20,31 +20,23 @@ const schema = yup.object().shape({
 })
 
 function App() {
+
   const [decks, setDecks] = useState<TDeck[]>([]);
   const [title, setTitle] = useState<string>('')
 
-
-
-  const {register, control, handleSubmit, watch, formState: {errors}} = useForm<Decks>({
-    resolver: yupResolver(schema)
+  const {register, control, handleSubmit, setValue, formState: {errors}} = useForm<Decks>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      title: ''
+    },
+  
   });
 
-  const deckSubmitHandler: SubmitHandler<Decks> = async ({title}: Decks, e: React.FormEvent) => {
-    console.log('title: ', title)
-    e.preventDefault();
+  const deckSubmitHandler: SubmitHandler<Decks> = async ({title}: Decks, ) => {
     const newDeck = await createDeck(title)
     setDecks([...decks, newDeck])
     setTitle("");
-  }
-
-  console.log('errors: ', errors)
-  console.log('watch variable title: ', watch('title'))
-
-  async function handleCreateDeck(e: React.FormEvent) {
-    e.preventDefault();
-    const newDeck = await createDeck(title)
-    setDecks([...decks, newDeck])
-    setTitle("");
+    setValue("title","");
   }
 
   async function handleDeleteDeck(deckId: string) {
@@ -56,7 +48,6 @@ function App() {
     async function fetchDecks() {
       const newDecks = await getDecks();
       setDecks(newDecks);
-      console.log('App.tsx useEffect', newDecks);
     }
     fetchDecks();
  
@@ -77,15 +68,15 @@ function App() {
         <Controller 
           name='title' 
           control={control} 
+          defaultValue=""
           render={({field}) => (
             <TextField 
               {...field}
-              {...register('title')} 
               id="outlined-basic" 
               label="Deck Title"  
               variant="outlined" 
-              value={title}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} error={!!errors.title} helperText={errors.title ? errors.title?.message : ''}
+              error={!!errors.title} 
+              helperText={errors.title ? errors.title?.message : ''}
             />
           )}
         />
