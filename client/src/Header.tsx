@@ -16,14 +16,18 @@ import { TDeck } from './api/getDecks';
 
 import './header.css';
 
-export function Header({decks}: {decks:TDeck}){
+type HeaderProps = {
+    decks: TDeck,
+    selectedDeck: string,
+    setSelectedDeck: (deck: string) => void
+}
 
-    const [deck, setDeck] = useState('');
+const Header: React.FC<HeaderProps> = ({decks, selectedDeck, setSelectedDeck}) => {
 
     const handleChange = (event: SelectChangeEvent) => {
-      setDeck(event.target.value as string);
+        console.log('selectedDeck: ', selectedDeck);
+      setSelectedDeck(event.target.value as string);
     };
-
 
     console.log('inside Header, decks: ', decks)
 
@@ -31,19 +35,19 @@ export function Header({decks}: {decks:TDeck}){
         <Box sx={{ flexGrow: 1 }}>
         <AppBar className="appbar">
             <Toolbar className="toolbar">
-                <Link to="/" style={{color: 'black'}}>CoolestFlashCardsEver</Link>
+                <Link to="/" style={{color: 'black'}} onClick={() => {setSelectedDeck("")}}>CoolestFlashCardsEver</Link>
                 <FormControl sx={{width: '30%'}}>
                     <InputLabel id="demo-simple-select-label">Decks</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={deck}
+                        value={selectedDeck}
                         label="Deck"
                         onChange={handleChange}
                     >
                         {decks.map((deck)=> 
                             <MenuItem value={deck.title} key={deck._id} >
-                                <Link to={`decks/${deck._id}`} style={{width: '100%', color: 'black'}}>{deck.title}</Link>
+                                <Link to={`decks/${deck._id}`} style={{width: '100%', color: 'black'}} >{deck.title}</Link>
                             </MenuItem>
                         )}
                     </Select>
@@ -54,3 +58,5 @@ export function Header({decks}: {decks:TDeck}){
         </Box>
     )
 }
+
+export default Header

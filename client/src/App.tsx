@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-
+import { useOutletContext } from "react-router-dom";
 
 type Decks = {
   title: string;
@@ -20,6 +20,8 @@ const schema = yup.object().shape({
 })
 
 function App() {
+
+  const [selectedDeck, setSelectedDeck] = useOutletContext();
 
   const [decks, setDecks] = useState<TDeck[]>([]);
   const [title, setTitle] = useState<string>('')
@@ -44,6 +46,11 @@ function App() {
     setDecks(decks.filter((deck)=> deck._id !== deckId));
   }
 
+ const linkHandler = (selectedDeckTitle: string) => {
+  console.log('inside linkHandler, selectedDeckTitle: ', selectedDeckTitle)
+  setSelectedDeck(selectedDeckTitle)
+ }
+
   useEffect(() => {
     async function fetchDecks() {
       const newDecks = await getDecks();
@@ -60,7 +67,7 @@ function App() {
         {decks.map((deck)=> <li key={deck._id}>
           {/*TODO: hide the X button until you hover over the card*/}
           <button onClick={()=> handleDeleteDeck(deck._id)}>X</button>
-          <Link to={`decks/${deck._id}`}>{deck.title}</Link>
+          <Link onClick={()=>linkHandler(deck.title)} to={`decks/${deck._id}`}>{deck.title}</Link>
           </li>)}
       </ul>
 
