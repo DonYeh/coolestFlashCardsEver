@@ -16,9 +16,25 @@ import { styled } from '@mui/material/styles';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
 
+type Card = {
+  text: string;
+  definition: string;
+  // _id: string;
+}
 
+const schema = yup.object().shape({
+  text: yup.string().required(),
+  definition: yup.string().required(),
+  // _id: yup.string()
+})
 
 export default function Deck() {
   
@@ -36,8 +52,17 @@ export default function Deck() {
     carousel = 'carousel'
   }
 
+  const {register, control, handleSubmit, setValue, formState: {errors}} = useForm<Card>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      text: '',
+      definition: ''
+    },
+  
+  });
+
   const [deck,setDeck] = useState<TDeck | undefined>()
-  const [cards, setCards] = useState<object[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
   const [mode, setMode] = useState<switchMode>(switchMode.study)
@@ -48,14 +73,14 @@ export default function Deck() {
   const cardBack = useRef<HTMLDivElement>(null);
   const cardFront = useRef<HTMLDivElement>(null);
 
-  async function handleCreateCard(e: React.FormEvent) {
-    e.preventDefault();
+  const cardSubmitHandler: SubmitHandler<Card> = async ({text, definition}: Card ) => {
     const { cards: serverCards } = await createCard(deckId!, text, definition)
     console.log('inside handleCreateCard', cards )
     setCards(serverCards)
     setText("");
     setDefinition("");
-
+    setValue("text", "")
+    setValue("definition", "")
   }
 
   async function handleDeleteCard(cardId: number) {
@@ -185,19 +210,40 @@ export default function Deck() {
         />
       }
 
-      <form onSubmit={handleCreateCard}>
-        <label htmlFor="card-text">Card Text</label>
-        <input id="card-text" 
-          value={text}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+      <form onSubmit={handleSubmit(cardSubmitHandler)}>
+        <Controller 
+          name='text'
+          control={control}
+          defaultValue=""
+          render={({field}) => (
+            <TextField
+              {...field}
+              id="outlined-basic"
+              label="Card Text"
+              variant="outlined"
+              error={!!errors.text}
+              helperText={errors.text ? errors.text?.message : ''}
+            />
+          )}
         />
-        <label htmlFor="card-definition">Card Definition</label>
-        <input id="card-definition" 
-        value={definition}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDefinition(e.target.value)}
-      />
-        <button>Create Card</button>
+        <Controller 
+          name='definition'
+          control={control}
+          defaultValue=""
+          render={({field}) => (
+            <TextField
+              {...field}
+              id="outlined-basic"
+              label="Card Definition"
+              variant="outlined"
+              error={!!errors.definition}
+              helperText={errors.definition ? errors.definition?.message : ''}
+            />
+          )}
+        />
+        <Button component="button"variant="contained" type="submit">Create Card</Button>
       </form>
+
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography>Study</Typography>
         <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? false : true}/>
