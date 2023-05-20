@@ -87,8 +87,11 @@ export default function Deck() {
 
     if(!deckId){ console.log('no deckID'); return} ;
     console.log('inside handleDeleteCard, X button clicked')
+    console.log('inside handleDeleteCard, deckId: ', deckId)
+    console.log('inside handleDeleteCard, cardId: ', cardId)
     // if(!deckId || !cardId) return;
     const newDeck = await deleteCard(deckId, cardId)
+    console.log('after new deck, deleteCard called')
     setCards(newDeck.cards);        
   }
 
@@ -147,9 +150,9 @@ export default function Deck() {
     setFlippedCard(state => ({...state, [cardId]: !state[cardId]}))
   }
 
-  console.log('view', view)
-  console.log('cards in Deck', cards)
-  console.log('Deck, cardFront: ', cardFront)
+  // console.log('view', view)
+  // console.log('cards in Deck', cards)
+  // console.log('Deck, cardFront: ', cardFront)
 
   useEffect(() => {
       async function fetchDeck() {

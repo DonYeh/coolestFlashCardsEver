@@ -2,8 +2,14 @@ import { useState } from "react";
 import './cardslider.css'
 import Typography from '@mui/material/Typography';
 import Card from './Card';
+import CSS from 'csstype';
 
-const slideStyles = {
+const sliderStyles: CSS.Properties = {
+  position: "relative",
+  height: "100%",
+};
+
+const slideStyles: CSS.Properties = {
     width: "100%",
     height: "100%",
     display: "flex",
@@ -12,12 +18,12 @@ const slideStyles = {
  
   };
 
-  const cardStyle = {
+  const cardStyle: CSS.Properties = {
     width: "600px",
     height: "400px",
   }
   
-  const rightArrowStyles = {
+  const rightArrowStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
@@ -28,7 +34,7 @@ const slideStyles = {
     cursor: "pointer",
   };
   
-  const leftArrowStyles = {
+  const leftArrowStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
@@ -39,12 +45,8 @@ const slideStyles = {
     cursor: "pointer",
   };
   
-  const sliderStyles = {
-    position: "relative",
-    height: "100%",
-  };
   
-  const dotsContainerStyles = {
+  const dotsContainerStyles: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
   };
@@ -75,10 +77,7 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
     const goToSlide = (cardIndex: number) => {
       setCurrentIndex(cardIndex);
     };
- 
-    console.log('inside cardSlider, cards: ', cards)
-    console.log('inside cardSlider, cards ID: ', cards[currentIndex]._id)
-    console.log('inside cardSlider, currentIndex: ', currentIndex)
+
   
     return (
       <div style={sliderStyles}>
@@ -98,7 +97,7 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
                 cardId={cards[currentIndex]._id} 
                 flippedCard={flippedCard} 
                 //why does handleDeleteCard not work in carousel view???? 
-
+                // handleDeleteCard={() => handleDeleteCard(cards[currentIndex]._id)}
                 handleDeleteCard={handleDeleteCard}
                 handleFlip={handleFlip} 
                 mode={mode}

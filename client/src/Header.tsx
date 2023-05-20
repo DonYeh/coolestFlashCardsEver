@@ -25,7 +25,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({decks, selectedDeck, setSelectedDeck}) => {
 
     const handleChange = (event: SelectChangeEvent) => {
-        console.log('selectedDeck: ', selectedDeck);
+        // console.log('selectedDeck: ', selectedDeck);
       setSelectedDeck(event.target.value as string);
     };
 

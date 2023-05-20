@@ -14,11 +14,7 @@ type CardProps = {
 }
 
 export default function Card({ card, cardBack, cardFront, cardId, flippedCard, handleDeleteCard, handleFlip, mode, view }: CardProps) {
-
-    console.log('Card, view: ', view)
-    console.log('Card, cardId: ', cardId)
     
-
 return (
     <div 
         className={`cardContainer ${view == 'carousel' ? 
