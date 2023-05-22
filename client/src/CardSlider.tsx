@@ -52,12 +52,12 @@ const slideStyles: CSS.Properties = {
   };
   
   type CardSliderProps = {
-    cards: {text: string; definition: string; _id: number}[];
+    cards: {text: string; definition: string; _id: string}[];
     cardBack: {current: string};
     cardFront: {current: string};
-    flippedCard: {[cardId: number]: boolean};
-    handleDeleteCard: (cardId: number) => void;
-    handleFlip: (cardId: number) => void;
+    flippedCard: {[cardId: string]: boolean};
+    handleDeleteCard: (cardId: string) => void;
+    handleFlip: (cardId: string) => void;
     mode: string;
     view: string;
 }
@@ -78,6 +78,8 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
       setCurrentIndex(cardIndex);
     };
 
+      console.log('inside CardSlider, cards: ', cards)
+      console.log('inside CardSlider, currentIndex: ', currentIndex)
   
     return (
       <div style={sliderStyles}>
@@ -94,11 +96,12 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
                 card={cards[currentIndex]}
                 cardBack={cardBack} 
                 cardFront={cardFront}
+                // cardId={cards[currentIndex]._id} 
                 cardId={cards[currentIndex]._id} 
                 flippedCard={flippedCard} 
                 //why does handleDeleteCard not work in carousel view???? 
                 // handleDeleteCard={() => handleDeleteCard(cards[currentIndex]._id)}
-                handleDeleteCard={handleDeleteCard}
+                handleDeleteCard={()=>handleDeleteCard(cards[currentIndex]._id)}
                 handleFlip={handleFlip} 
                 mode={mode}
                 view={view}

@@ -27,7 +27,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 type Card = {
   text: string;
   definition: string;
-  // _id: string;
+  _id: string;
 }
 
 const schema = yup.object().shape({
@@ -39,7 +39,7 @@ const schema = yup.object().shape({
 export default function Deck() {
   
   type flippedCardStatus = {
-    [userId: number]: boolean;
+    [userId: string]: boolean;
   }
 
   enum switchMode {
@@ -61,7 +61,7 @@ export default function Deck() {
   
   });
 
-  const [deck,setDeck] = useState<TDeck | undefined>()
+  const [deck,setDeck] = useState<TDeck>()
   const [cards, setCards] = useState<Card[]>([]);
   const [text, setText] = useState<string>('');
   const [definition, setDefinition] = useState<string>('');
@@ -73,8 +73,8 @@ export default function Deck() {
   const cardBack = useRef<HTMLDivElement>(null);
   const cardFront = useRef<HTMLDivElement>(null);
 
-  const cardSubmitHandler: SubmitHandler<Card> = async ({text, definition}: Card ) => {
-    const { cards: serverCards } = await createCard(deckId!, text, definition)
+  const cardSubmitHandler: SubmitHandler<Card> = async ({text, definition, _id}: Card ) => {
+    const { cards: serverCards } = await createCard(deckId!, text, definition, _id)
     console.log('inside handleCreateCard', cards )
     setCards(serverCards)
     setText("");
@@ -83,7 +83,7 @@ export default function Deck() {
     setValue("definition", "")
   }
 
-  async function handleDeleteCard(cardId: number) {
+  async function handleDeleteCard(cardId: string) {
 
     if(!deckId){ console.log('no deckID'); return} ;
     console.log('inside handleDeleteCard, X button clicked')
@@ -91,9 +91,12 @@ export default function Deck() {
     console.log('inside handleDeleteCard, cardId: ', cardId)
     // if(!deckId || !cardId) return;
     const newDeck = await deleteCard(deckId, cardId)
-    console.log('after new deck, deleteCard called')
+
+    console.log('newDeck: ', newDeck)
+    console.log('after new deck, deleteCard')
     setCards(newDeck.cards);        
   }
+  console.log('inside Deck, cards: ', cards)
 
 
   const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -146,7 +149,7 @@ export default function Deck() {
     view == switchView.grid ? setView(switchView.carousel) : setView(switchView.grid)
   }
 
-  const handleFlip = (cardId: number) => {
+  const handleFlip = (cardId: string) => {
     setFlippedCard(state => ({...state, [cardId]: !state[cardId]}))
   }
 
@@ -191,7 +194,7 @@ export default function Deck() {
                   card={card}
                   cardBack={cardBack} 
                   cardFront={cardFront}
-                  cardId={cardId} 
+                  cardId={card._id} 
                   flippedCard={flippedCard} 
                   handleDeleteCard={handleDeleteCard} 
                   handleFlip={handleFlip} 

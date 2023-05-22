@@ -1,9 +1,15 @@
 import { API_URL } from "./config";
 
+type Card = {
+    text: string;
+    definition: string;
+    _id: string;
+  }
+
 export type TDeck = {
     title: string;
     // cards: string[];
-    cards: object[];
+    cards: Card[];
     // cards: [{text: string, definition: string}];
     _id: string;
   }
