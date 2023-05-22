@@ -11,7 +11,10 @@
   gap: 10px;
 }
 
+//TODO: make columns responsive
+
 .App__decks {
+padding-left: 0;
 display: grid;
 width: 600px;
 grid-gap: 10px;
@@ -54,8 +57,10 @@ grid-template-columns: repeat(3,1fr);
 }
 
 .App__form {
+  padding-top: 3%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
   align-items: center;
 }
 

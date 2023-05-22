@@ -12,6 +12,7 @@
   }
   
   .deck form {
+    padding-top: 3%;
     display: flex;
     justify-content: space-evenly;
     gap:10px;
@@ -23,6 +24,7 @@
   }
   
   .cards {
+  padding-left: 0;
   display: grid;
   width: 600px;
   margin: 0 auto;

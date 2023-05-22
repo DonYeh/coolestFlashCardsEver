@@ -1,4 +1,4 @@
-@import 'deck.css';
+@import 'deck.scss';
 
 .card {
   width: 600px;
