@@ -19,7 +19,7 @@ const slideStyles: CSS.Properties = {
   };
 
   const cardStyle: CSS.Properties = {
-    width: "600px",
+    width: "653px",
     height: "400px",
   }
   
@@ -27,9 +27,9 @@ const slideStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
-    right: "32px",
-    fontSize: "45px",
-    color: "#000",
+    right: "-33px",
+    fontSize: "60px",
+    color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
   };
@@ -38,9 +38,9 @@ const slideStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
-    left: "32px",
-    fontSize: "45px",
-    color: "#000",
+    left: "-33px",
+    fontSize: "60px",
+    color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
   };
@@ -110,6 +110,7 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
                 handleFlip={handleFlip} 
                 mode={mode}
                 view={view}
+                style={cardStyle}
             />
         </div>
         <div style={dotsContainerStyles}>
