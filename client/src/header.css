@@ -9,7 +9,23 @@
     color: black;
 }
 
+.toolbar--logo {
+    color: black;
+    justify-content: start;
+}
+
+/* .toolbar--selectDeck {
+    justify-content: center;
+    width: "20%";
+} */
+
 .decks {
 color: white;
 
+}
+
+/*same length as logo, (login) placeholder used to center deck selector*/
+.emptyDiv {
+    opacity: 0;
+    cursor: default;
 }

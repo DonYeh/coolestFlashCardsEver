@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Link } from "react-router-dom";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TDeck } from './api/getDecks';
 
 
@@ -29,15 +29,18 @@ const Header: React.FC<HeaderProps> = ({decks, selectedDeck, setSelectedDeck}) =
       setSelectedDeck(event.target.value as string);
     };
 
+// TODO: set selectedDeck on refresh
+useEffect(() => setSelectedDeck(selectedDeck), [])
+
     console.log('inside Header, decks: ', decks)
 
     return (
         <Box sx={{ flexGrow: 1 }}>
         <AppBar className="appbar">
             <Toolbar className="toolbar">
-                <Link to="/" style={{color: 'black'}} onClick={() => {setSelectedDeck("")}}>CoolestFlashCardsEver</Link>
-                <FormControl sx={{width: '30%'}}>
-                    <InputLabel id="demo-simple-select-label">Decks</InputLabel>
+                <Link to="/" className="toolbar--logo" onClick={() => {setSelectedDeck("")}}>CoolestFlashCardsEver</Link>
+                <FormControl sx={{width: '20%', padding: '5px 0'}} className="toolbar--selectDeck">
+                    <InputLabel sx={{paddingTop: '5px', textAlign: 'center'}} id="demo-simple-select-label">Decks</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -52,7 +55,8 @@ const Header: React.FC<HeaderProps> = ({decks, selectedDeck, setSelectedDeck}) =
                         )}
                     </Select>
                 </FormControl>
-                <Button color="inherit">Login</Button>
+                {/* <Button color="inherit">Login</Button> */}
+                <div className='emptyDiv'>CoolestFlashCardsEver</div>
             </Toolbar>
         </AppBar>
         </Box>
