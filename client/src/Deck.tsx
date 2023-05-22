@@ -1,7 +1,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import './deck.css';
+import './deck.scss';
 import { deleteDeck } from './api/deleteDecks';
 import { createDeck } from './api/createDeck';
 import { getDecks, TDeck } from './api/getDecks';
@@ -228,7 +228,7 @@ export default function Deck() {
         />
       }
 
-      <form onSubmit={handleSubmit(cardSubmitHandler)}>
+      <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
         <Controller 
           name='text'
           control={control}
