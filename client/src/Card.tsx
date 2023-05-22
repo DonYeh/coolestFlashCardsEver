@@ -29,15 +29,15 @@ return (
                 {mode == 'study' ? 
                     <>
                         <div className="text">
-                            {card.text}
+                            {card?.text}
                         </div>
                         <div className="definition">
-                            {card.definition}
+                            {card?.definition}
                         </div>
                     </>
                     :
                         <div className="text">
-                          {card.text}
+                          {card?.text}
                         </div> 
                 }
             </div>

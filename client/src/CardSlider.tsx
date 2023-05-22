@@ -55,15 +55,17 @@ const slideStyles: CSS.Properties = {
     cards: {text: string; definition: string; _id: number}[];
     cardBack: {current: string};
     cardFront: {current: string};
+    currentIndex: number;
     flippedCard: {[cardId: number]: boolean};
     handleDeleteCard: (cardId: number) => void;
     handleFlip: (cardId: number) => void;
     mode: string;
+    setCurrentIndex: (currentIndex:number) => void;
     view: string;
 }
 
-function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handleDeleteCard, mode, view}: CardSliderProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, handleFlip, handleDeleteCard, mode, setCurrentIndex, view}: CardSliderProps) {
+    // const [currentIndex, setCurrentIndex] = useState(0);
     const goToPrevious = () => {
       const isFirstSlide = currentIndex === 0;
       const newIndex = isFirstSlide ? cards.length - 1 : currentIndex - 1;
@@ -78,6 +80,8 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
       setCurrentIndex(cardIndex);
     };
 
+    console.log('CardSlider, card[currentIndex]: ', cards[currentIndex])
+    console.log('CardSlider, currentIndex: ', currentIndex)
   
     return (
       <div style={sliderStyles}>
@@ -94,11 +98,15 @@ function CardSlider({cards, cardBack, cardFront, flippedCard, handleFlip, handle
                 card={cards[currentIndex]}
                 cardBack={cardBack} 
                 cardFront={cardFront}
-                cardId={cards[currentIndex]._id} 
+                cardId={currentIndex} 
                 flippedCard={flippedCard} 
                 //why does handleDeleteCard not work in carousel view???? 
                 // handleDeleteCard={() => handleDeleteCard(cards[currentIndex]._id)}
-                handleDeleteCard={handleDeleteCard}
+                // handleDeleteCard={()=>handleDeleteCard(currentIndex)}
+                handleDeleteCard={()=>{
+                  handleDeleteCard(currentIndex);
+                  setCurrentIndex(currentIndex-1)
+                }}
                 handleFlip={handleFlip} 
                 mode={mode}
                 view={view}

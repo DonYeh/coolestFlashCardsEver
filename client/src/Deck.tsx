@@ -70,6 +70,9 @@ export default function Deck() {
   const [flippedCard, setFlippedCard] = useState<flippedCardStatus>({})
   const { deckId } = useParams();
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+
   const cardBack = useRef<HTMLDivElement>(null);
   const cardFront = useRef<HTMLDivElement>(null);
 
@@ -81,7 +84,14 @@ export default function Deck() {
     setDefinition("");
     setValue("text", "")
     setValue("definition", "")
-  }
+
+    console.log('view: ', view)
+    if (view === 'carousel') {
+      console.log('carousel')
+      setCurrentIndex(currentIndex+1)
+
+    } 
+    }
 
   async function handleDeleteCard(cardId: number) {
 
@@ -144,6 +154,7 @@ export default function Deck() {
 
   const handleViewSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
     view == switchView.grid ? setView(switchView.carousel) : setView(switchView.grid)
+    setCurrentIndex(0)
   }
 
   const handleFlip = (cardId: number) => {
@@ -165,6 +176,8 @@ export default function Deck() {
     fetchDeck();
  
   }, [deckId]);
+
+  // console.log('Deck, cardId', cardId)
 
   //TODO: 
   // 1. add flip card button and animation to card, put title on front, definition on back
@@ -210,6 +223,8 @@ export default function Deck() {
           handleDeleteCard={handleDeleteCard} 
           mode={mode} 
           view={view}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
         />
       }
 
