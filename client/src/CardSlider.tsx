@@ -22,7 +22,7 @@ const slideStyles: CSS.Properties = {
     width: "653px",
     height: "400px",
   }
-  
+  //TODO: add hover to right and left arrows
   const rightArrowStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
@@ -32,6 +32,11 @@ const slideStyles: CSS.Properties = {
     color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
+    
+    // hover: {
+    // "&:hover": {
+    //   color:"purple",
+    // }}
   };
   
   const leftArrowStyles: CSS.Properties = {
@@ -58,23 +63,33 @@ const slideStyles: CSS.Properties = {
     currentIndex: number;
     flippedCard: {[cardId: number]: boolean};
     handleDeleteCard: (cardId: number) => void;
-    handleFlip: (cardId: number) => void;
+    handleFlip: (cardId: number, reset?: boolean) => void;
     mode: string;
     setCurrentIndex: (currentIndex:number) => void;
     view: string;
 }
 
 function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, handleFlip, handleDeleteCard, mode, setCurrentIndex, view}: CardSliderProps) {
-    // const [currentIndex, setCurrentIndex] = useState(0);
-    const goToPrevious = () => {
+  //TODO: flip the previous card back to front when going to next card
+  const goToPrevious = () => {
       const isFirstSlide = currentIndex === 0;
       const newIndex = isFirstSlide ? cards.length - 1 : currentIndex - 1;
       setCurrentIndex(newIndex);
+      // handleFlip(() => handleFlip(newIndex))
+      handleFlip(newIndex+1,true)
+      console.log('in Prev, newIndex',newIndex)
+      console.log('in Prev, flippedCard',flippedCard)
+
     };
     const goToNext = () => {
       const isLastSlide = currentIndex === cards.length - 1;
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
+      handleFlip(newIndex-1,true)
+      console.log('in Next, newIndex',newIndex)
+      console.log('in Next, flippedCard',flippedCard)
+
+
     };
     const goToSlide = (cardIndex: number) => {
       setCurrentIndex(cardIndex);
@@ -110,7 +125,6 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
                 handleFlip={handleFlip} 
                 mode={mode}
                 view={view}
-                style={cardStyle}
             />
         </div>
         <div style={dotsContainerStyles}>

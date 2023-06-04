@@ -17,7 +17,7 @@ import { TDeck } from './api/getDecks';
 import './header.css';
 
 type HeaderProps = {
-    decks: TDeck,
+    decks: TDeck[],
     selectedDeck: string,
     setSelectedDeck: (deck: string) => void
 }
@@ -30,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({decks, selectedDeck, setSelectedDeck}) =
     };
 
 // TODO: set selectedDeck on refresh
+// TODO: theme switcher
 useEffect(() => setSelectedDeck(selectedDeck), [])
 
     console.log('inside Header, decks: ', decks)

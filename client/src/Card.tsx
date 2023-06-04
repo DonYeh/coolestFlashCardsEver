@@ -6,11 +6,11 @@ type CardProps = {
     cardBack: {current: string};
     cardFront: {current: string};
     cardId: number;
-    flippedCard: {[cardId: number]: boolean};
+    flippedCard?: {[cardId: number]: boolean} | null;
     handleDeleteCard: (cardId: number) => void;
-    handleFlip: (cardId: number) => void;
-    mode: string;
-    view: string;
+    handleFlip: (cardId: number, reset?: boolean) => void;
+    mode?: string | null;
+    view?: string | null;
 }
 
 export default function Card({ card, cardBack, cardFront, cardId, flippedCard, handleDeleteCard, handleFlip, mode, view }: CardProps) {
@@ -19,7 +19,10 @@ return (
     <div 
         className={`cardContainer ${view == 'carousel' ? 
         'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}  
-        onClick={() => handleFlip(cardId)} >
+        onClick={ 
+            () => handleFlip(cardId)}
+            
+            >
         <button 
             className={`cardButton ${view == 'carousel' ? 
             'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}     

@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  // max-width: 1280px;
+  // margin: 0 auto;
+  // padding: 2rem;
+  width: 100%;
   text-align: center;
 }
 
@@ -9,53 +10,118 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
+  // background-color: #f5f5f5;
 }
 
 //TODO: make columns responsive
 
-.App__decks {
-padding-left: 0;
-display: grid;
-width: 600px;
-grid-gap: 10px;
-grid-template-columns: repeat(3,1fr);
+.App__decksContainer {
+flex-direction: row;
+justify-content: center;
+padding-bottom: 2rem;
+
 }
 
+// .App__decksContainer {
+// padding-left: 0;
+// // display: grid;
+// // width: 800px;
+// // max-width: 900px;
+// grid-gap: 20px;
+// // grid-template-columns: repeat(3,1fr);
+// }
+
+.App__deckContainer{
+  // background-color: green;
+  justify-content: center;
+  flex-direction: row;
+
+}
+
+// .App_deckContainer {
+// background-color: blueviolet;
+// flex-direction: row;
+// // align-items: center;
+// }
+
 .App__decks a {
-  color: white;
+  color: black;
+  display: block;
+  // background-color: orange;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   line-height: 120px;
+  
   }
 
-.App__decks li {
+// .App__decks li {
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 120px;
+  
+//   // background: black;
+//   border: 1px solid white;
+//   border-radius: 5px;
+//   transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+// }
+
+// .App__decksCard {
+//   // background-color: purple;
+//   background-color: #d3d4d8;
+//   // color: black;
+//   border-radius: 5px;
+//   min-width: 500px;
+// }
+
+.App_deckCard {
+  background-color: #d3d4d8;
+  border-radius: 5px;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 120px;
-  color: white;
-  background: black;
-  border: 1px solid white;
-  border-radius: 10px;
-  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+  width: 400px;
+  // padding: 2em;
+  // min-width: 360px;
+  // max-width: 350px;
+
+  button {
+    position: absolute;
+    font-size: 10px;
+    top: 8px;
+    right: 8px;
+    background: grey;
+    // background: purple;
+    z-index: 50;
+  }
+
+ .App_cardActionArea {
+  // background-color: orange;
+  padding: 2rem;
+
+ }
+
+  // a {
+  //   background-color: pink;
+  //   display: block;
+  // }
 }
 
-.App__decks li button {
-  position: absolute;
-  font-size: 10px;
-  top: 5px;
-  right: 5px;
-  background: grey;
-}
+
 
 .App__decks li:hover {
-  background: rgba(0,0,0,.8);
+  // background: rgba(0,0,0,.8);
   cursor:pointer;
   --translate-y: -2px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+  color: blue;
 }
 
+.App_formContainer {
+  justify-content: center;
+}
 .App__form {
   padding-top: 3%;
   display: flex;
@@ -66,4 +132,6 @@ grid-template-columns: repeat(3,1fr);
 
 .App__form button{
   line-height: 2.8;
+  background-color: #3fbac2;
+  color: black
 }

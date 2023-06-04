@@ -1,8 +1,9 @@
 import Header from './Header';
+import './Layout.scss'
 import {Outlet, useOutletContext} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getDecks, TDeck } from './api/getDecks';
-
+import { Box } from '@mui/material'
 
 const Layout = () => {
   const [decks, setDecks] = useState<TDeck[]>([]);
@@ -24,8 +25,10 @@ const Layout = () => {
 
     return(
     <>
-    <Header decks={decks} selectedDeck={selectedDeck} setSelectedDeck={setSelectedDeck}/>
-    <Outlet context={[selectedDeck,setSelectedDeck]}/>
+      <Box classname="appContainer">
+        <Header decks={decks} selectedDeck={selectedDeck} setSelectedDeck={setSelectedDeck}/>
+        <Outlet context={[selectedDeck,setSelectedDeck]}/>
+      </Box>
     </>
     )
 }

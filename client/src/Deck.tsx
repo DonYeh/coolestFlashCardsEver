@@ -157,8 +157,14 @@ export default function Deck() {
     setCurrentIndex(0)
   }
 
-  const handleFlip = (cardId: number) => {
+  const handleFlip = (cardId: number, reset?: boolean) => {
+    console.log('flippedCard: ', flippedCard)
+    console.log('flippedCard - Card flipped! ')
+    
     setFlippedCard(state => ({...state, [cardId]: !state[cardId]}))
+    if(reset){
+      setFlippedCard(state => ({...state, [cardId]:true}))
+    }
   }
 
   // console.log('view', view)
@@ -191,6 +197,9 @@ export default function Deck() {
   // add carousel mode 
   // 3. themes - light/dark mode
   // 4. stretch goals: upload picture/sound to definitions, could possibly pull images from some API/AI
+
+
+
 
   return (
     <div className="deck">
