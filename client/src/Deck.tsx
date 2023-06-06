@@ -199,32 +199,36 @@ export default function Deck() {
   // 3. themes - light/dark mode
   // 4. stretch goals: upload picture/sound to definitions, could possibly pull images from some API/AI
 
-
+  // xs, extra-small: 0px.
+  // sm, small: 600px.
+  // md, medium: 900px.
+  // lg, large: 1200px.
+  // xl, extra-large: 1536px.
 
 
   return (
-    <Grid container className="deck">
+    <Grid container className="Deck">
       
       {view == 'grid' ? 
   <Grid item container className="Deck_cardsContainer"  >
         
-          {cards.map((card, cardId) => 
+        {cards.map((card, cardId) => 
 
-            <Grid item xs={12} sm={5} md={4} lg={3} xl={2.5} container className="Deck_cardContainer" key={cardId}>
-                <Card 
-                  card={card}
-                  cardBack={cardBack} 
-                  cardFront={cardFront}
-                  cardId={cardId} 
-                  flippedCard={flippedCard} 
-                  handleDeleteCard={handleDeleteCard} 
-                  handleFlip={handleFlip} 
-                  mode={mode}
-                  view={view}
-                />
-            </Grid>
-            )}
-            </Grid>
+          <Grid item xs={12} sm={5} md={4} lg={3} xl={2.5} container className="Deck_cardContainer" key={cardId}>
+              <Card 
+                card={card}
+                cardBack={cardBack} 
+                cardFront={cardFront}
+                cardId={cardId} 
+                flippedCard={flippedCard} 
+                handleDeleteCard={handleDeleteCard} 
+                handleFlip={handleFlip} 
+                mode={mode}
+                view={view}
+              />
+          </Grid>
+          )}
+  </Grid>
         :
         <CardSlider 
           cards={cards}
@@ -240,50 +244,89 @@ export default function Deck() {
         />
       }
 
+{/* //TODO: center the form container + widen the input box and create card button */}
+  <Grid item container xs={12} className="Deck__formContainer">
       <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
-        <Controller 
-          name='text'
-          control={control}
-          defaultValue=""
-          render={({field}) => (
-            <TextField
-              {...field}
-              id="outlined-basic"
-              label="Card Text"
-              variant="outlined"
-              error={!!errors.text}
-              helperText={errors.text ? errors.text?.message : ''}
-            />
-          )}
-        />
-        <Controller 
-          name='definition'
-          control={control}
-          defaultValue=""
-          render={({field}) => (
-            <TextField
-              {...field}
-              id="outlined-basic"
-              label="Card Definition"
-              variant="outlined"
-              error={!!errors.definition}
-              helperText={errors.definition ? errors.definition?.message : ''}
-            />
-          )}
-        />
-        <Button component="button"variant="contained" type="submit">Create Card</Button>
-      </form>
+        <Grid item container spacing={2} className="formInputsContainer">
+          <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" sx={{
+            justifyContent: {
+              xs: 'center',
+              sm: 'flex-end',
+              lg: 'flex-end',
 
-      <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Study</Typography>
-        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? false : true}/>
-        <Typography>Quiz</Typography>
-      </Stack>
-      <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Grid</Typography>
-        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleViewSwitch} checked={view == 'carousel' ? true : false}/>
-        <Typography>Carousel</Typography>
-      </Stack>
+            }}}>
+        <Grid item className="formTextContainer">
+            <Controller 
+              name='text'
+              control={control}
+              defaultValue=""
+              render={({field}) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  label="Card Text"
+                  variant="outlined"
+                  error={!!errors.text}
+                  helperText={errors.text ? errors.text?.message : ''}
+                />
+              )}
+            />
+          </Grid>
+          </Grid>
+          <Grid item container xs={12} sm={6} lg={4}className="Deck__form--definition Deck__formInputs"  sx={{
+            justifyContent: {
+              xs: 'center',
+              sm: 'flex-start',
+              lg: 'center',
+
+            }}}>
+          <Grid item className="formDefinitionContainer">
+            <Controller 
+              name='definition'
+              control={control}
+              defaultValue=""
+              render={({field}) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  label="Card Definition"
+                  variant="outlined"
+                  error={!!errors.definition}
+                  helperText={errors.definition ? errors.definition?.message : ''}
+                />
+              )}
+            />
+            </Grid>
+          </Grid>
+          <Grid item container xs={12} lg={4} className="Deck__form--submit Deck__formInputs" sx={{
+            justifyContent: {
+              xs: 'center',
+              lg: 'flex-start',
+
+            }}}>
+              <Grid item>
+            <Button component="button"variant="contained" type="submit">Create Card</Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </form>
+    </Grid>
+      <Grid item container xs={12} className="Deck__switchesContainer">
+        <Grid item xs={12} sm={6} >
+          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--modeSwitch">
+            <Typography>Study</Typography>
+            <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? false : true}/>
+            <Typography>Quiz</Typography>
+          </Stack>
+        </Grid>
+        <Grid item xs={12} sm={6} >
+          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--viewSwitch">
+            <Typography>Grid</Typography>
+            <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleViewSwitch} checked={view == 'carousel' ? true : false}/>
+            <Typography>Carousel</Typography>
+          </Stack>
+        </Grid>
+      </Grid>
     </Grid>
   )
 }

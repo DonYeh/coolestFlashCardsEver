@@ -77,4 +77,5 @@ button:focus-visible {
     /* background-color: red; */
     color: teal;
     width: 100%;
+    padding-top: 3.5rem;
 }

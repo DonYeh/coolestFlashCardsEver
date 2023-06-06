@@ -4,42 +4,6 @@
     text-align: center;
   }
   
-  .deck {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .deck form {
-    padding-top: 3%;
-    display: flex;
-    justify-content: space-evenly;
-    gap:10px;
-    align-items: center;
-  }
-
-  .Deck__form button{
-    line-height: 2.8;
-  }
-  
-  .Deck_cardsContainer {
-  padding-left: 0;
-  display: flex;
-  width: 400px;
-  margin: 0 auto;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1.5rem;
- 
-  }
-
-  .Deck_cardContainer {
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-  }
-  
   ul li::marker {
     content: none;
   }
@@ -137,3 +101,99 @@
     display: none;
    }
 
+   .Deck {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+
+  .Deck__form button{
+    line-height: 2.8;
+  }
+  
+  .Deck_cardsContainer {
+  padding-left: 0;
+  display: flex;
+  width: 400px;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+ 
+  }
+
+  .Deck_cardContainer {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .Deck__formContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:12px;
+    padding: 1rem 2rem;
+}
+
+  .Deck__form {
+    display: flex;
+    width: 100%;
+  }
+
+  .Deck__formInputs{
+    
+   
+     
+    }
+  
+
+    /**
+.formInputsContainer {
+
+  .Deck__form--text {
+    background-color: purple;
+  }
+
+  .Deck__form--definition {
+    background-color: yellow;
+  }
+
+  .Deck__form--submit {
+   background-color: orangered;
+  }
+}**/
+
+/**
+.formTextContainer {
+  justify-content: flex-end;
+}**/
+
+/**.formDefinitionContainer {
+  justify-content: flex-;
+}**/
+
+
+   .Deck__form--text {
+  
+   }
+   .Deck__form--definition {
+
+   }
+
+
+   .Deck__switchesContainer {
+    justify-content: center;
+   }
+
+   .Deck__switchesContainer--modeSwitch {
+    justify-content: center;
+
+   }
+
+   .Deck__switchesContainer--viewSwitch {
+    justify-content: center;
+
+   }

@@ -93,28 +93,28 @@ function App() {
       </Grid>
       <Grid container item xs={12} className="App_formContainer">
         <form className="App__form" onSubmit={handleSubmit(deckSubmitHandler)}>
-            <Grid container>
-          <Grid item xs={12} sm={6}>
-            <Controller 
-              name='title' 
-              control={control} 
-              defaultValue=""
-              render={({field}) => (
-                <TextField 
-                  {...field}
-                  id="outlined-basic" 
-                  label="Deck Title"  
-                  variant="outlined" 
-                  error={!!errors.title} 
-                  helperText={errors.title ? errors.title?.message : ''}
-                />
-              )}
-            />
-          </Grid>
-          {/* TODO: add media query for TextField and Button to widen and padding top/bottom at xs breakpoint */}
-          <Grid item xs={12} sm={6}>
-            <Button component="button"variant="contained" type="submit" >Create Deck</Button>
-          </Grid>
+          <Grid container spacing={2} >
+            <Grid item xs={12} sm={6}>
+              <Controller 
+                name='title' 
+                control={control} 
+                defaultValue=""
+                render={({field}) => (
+                  <TextField 
+                    {...field}
+                    id="outlined-basic" 
+                    label="Deck Title"  
+                    variant="outlined" 
+                    error={!!errors.title} 
+                    helperText={errors.title ? errors.title?.message : ''}
+                  />
+                )}
+              />
+            </Grid>
+            {/* TODO: add media query for TextField and Button to widen and padding top/bottom at xs breakpoint */}
+            <Grid item xs={12} sm={6}>
+              <Button component="button"variant="contained" type="submit" >Create Deck</Button>
+            </Grid>
           </Grid>
         </form>
       </Grid>
