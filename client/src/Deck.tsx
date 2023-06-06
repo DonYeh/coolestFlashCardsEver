@@ -22,6 +22,7 @@ import Button from '@mui/material/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Card as MUICard, Grid, CardActionArea } from '@mui/material'
 
 
 type Card = {
@@ -202,13 +203,14 @@ export default function Deck() {
 
 
   return (
-    <div className="deck">
+    <Grid container className="deck">
       
       {view == 'grid' ? 
-
-        <ul className="cards">
+  <Grid item container className="Deck_cardsContainer"  >
+        
           {cards.map((card, cardId) => 
-            <li key={cardId}>
+
+            <Grid item xs={12} sm={5} md={4} lg={3} xl={2.5} container className="Deck_cardContainer" key={cardId}>
                 <Card 
                   card={card}
                   cardBack={cardBack} 
@@ -220,8 +222,9 @@ export default function Deck() {
                   mode={mode}
                   view={view}
                 />
-            </li>)}
-        </ul> 
+            </Grid>
+            )}
+            </Grid>
         :
         <CardSlider 
           cards={cards}
@@ -281,6 +284,6 @@ export default function Deck() {
         <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleViewSwitch} checked={view == 'carousel' ? true : false}/>
         <Typography>Carousel</Typography>
       </Stack>
-    </div>
+    </Grid>
   )
 }

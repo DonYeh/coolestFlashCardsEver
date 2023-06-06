@@ -1,5 +1,4 @@
 #root {
-    max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
@@ -23,15 +22,24 @@
     line-height: 2.8;
   }
   
-  .cards {
+  .Deck_cardsContainer {
   padding-left: 0;
-  display: grid;
-  width: 600px;
+  display: flex;
+  width: 400px;
   margin: 0 auto;
-  grid-gap: 10px;
-  grid-template-columns: repeat(3,1fr);
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+ 
   }
 
+  .Deck_cardContainer {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+  
   ul li::marker {
     content: none;
   }
@@ -41,19 +49,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
-    color: white;
-    background: black;
+    height: 180px;
+    color: black;
+    background: white;
     border: 1px solid white;
     border-radius: 10px;
     box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
     transform-style: preserve-3d;
     transition: 150ms;
     transform: rotateY(var(--rotate-y, 0)) translateY(var(--translate-y,0));
+    width: 100%
   }
 
   .cardContainer:hover {
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.1);
     cursor:pointer;
     --translate-y: -2px;
     box-shadow: 0 0 5px 2px rgba (0,0,0,.9);
@@ -77,6 +86,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    word-break: break-all;
+    padding: 1rem;
   }
   
   .cardButton {
@@ -99,7 +110,7 @@
   .cardButton.flip {
     position: absolute;
     top: 5px;
-    right: 153px;
+    right: 294px;
     transform-style: preserve-3d;
   }
   
@@ -108,6 +119,8 @@
     transform-style: preserve-3d;
     /* transition: 150ms; */
     transform: rotateY(var(--rotate-y, 0));
+    min-width: 200px;
+    width: 400px;
    }
    .cardDiv.flip {
     /* background: purple; */

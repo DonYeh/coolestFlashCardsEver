@@ -6,7 +6,7 @@ type CardProps = {
     cardBack: {current: string};
     cardFront: {current: string};
     cardId: number;
-    flippedCard?: {[cardId: number]: boolean} | null;
+    flippedCard: {[cardId: number]: boolean};
     handleDeleteCard: (cardId: number) => void;
     handleFlip: (cardId: number, reset?: boolean) => void;
     mode?: string | null;

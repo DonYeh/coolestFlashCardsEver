@@ -73,10 +73,10 @@ function App() {
     <Grid container className="App">
       {/* <h1>Decks</h1> */}
             {/*TODO: hide the X button until you hover over the card*/}
-      <Grid item container xs={12} className="App__decksContainer" spacing={2}>
+      <Grid item container className="App__decksContainer" spacing={2}>
         {/* <ul className="App__decksContainer"> */}
           {decks.map((deck) => 
-          <Grid item container xs={12} sm={6} md={4} lg={3}className='App__deckContainer' >
+          <Grid item container xs={12} sm={6} md={4} lg={3} xl={2.5} className='App__deckContainer' >
           {/* <Grid item className='App__decksCard' > */}
             {/* <li key={deck._id} className='App__decksCard'> */}
               {/* <Grid item> */}
