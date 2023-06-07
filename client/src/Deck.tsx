@@ -207,7 +207,11 @@ export default function Deck() {
 
 
   return (
-    <Grid container className="Deck">
+    <Grid container className="Deck" sx={{padding: {
+      xs: '0rem',
+      sm: '0rem', 
+      md: '0rem',
+    }}}>
       
       {view == 'grid' ? 
   <Grid item container className="Deck_cardsContainer"  >

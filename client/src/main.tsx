@@ -45,7 +45,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Box className="appContainer">
+      <Box className="appContainer" sx={{paddingInline: {
+        xs: 'max(20vw,2.5rem)', 
+        sm: '1rem',
+        md: '0rem',
+      }}} >
       <RouterProvider router={router} />
       </Box>
     </ThemeProvider>

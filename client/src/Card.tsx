@@ -17,11 +17,15 @@ export default function Card({ card, cardBack, cardFront, cardId, flippedCard, h
     
 return (
     <div 
+        // convert this div to a Grid component
+        // sx={{ width: {
+        // xs: '80%',
+        // sm: '100%'}}} 
         className={`cardContainer ${view == 'carousel' ? 
         'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}  
         onClick={ 
             () => handleFlip(cardId)}
-            
+           
             >
         <button 
             className={`cardButton ${view == 'carousel' ? 

@@ -40,7 +40,7 @@ useEffect(() => setSelectedDeck(selectedDeck), [])
         <AppBar className="appbar">
             <Toolbar className="toolbar">
                 <Link to="/" className="toolbar--logo" onClick={() => {setSelectedDeck("")}}>CoolestFlashCardsEver</Link>
-                <FormControl sx={{width: '20%', padding: '5px 0'}} className="toolbar--selectDeck">
+                <FormControl sx={{width: '20%', padding: '5px 0', minWidth: '6rem'}} className="toolbar--selectDeck">
                     <InputLabel sx={{paddingTop: '5px', textAlign: 'center'}} id="demo-simple-select-label">Decks</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
