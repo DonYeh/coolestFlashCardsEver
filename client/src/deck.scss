@@ -100,10 +100,7 @@
     /* background: purple; */
     transform-style: preserve-3d;
     /* transition: 150ms; */
-    transform: rotateY(var(--rotate-y, 0));
-    position: relative;
-    --rotate-y: 180deg;
-    transform-style: preserve-3d;
+    
    }
 
    .front.hidden,
