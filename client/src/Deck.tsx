@@ -247,23 +247,44 @@ export default function Deck() {
 {/* //TODO: center the form container + widen the input box and create card button */}
   <Grid item container xs={12} className="Deck__formContainer">
       <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
-        <Grid item container spacing={2} className="formInputsContainer">
-          <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" sx={{
+        <Grid item container spacing={2} 
+          sx={{
+            paddingInline: {
+              md:'3rem',
+              lg: '0',
+            },
+            
+        marginLeft: {
+          lg: 'max(5rem,11.5vw)',
+          xl: 'max(7rem,16vw)'
+        }}}
+          className="formInputsContainer">
+          <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" 
+          sx={{
             justifyContent: {
               xs: 'center',
               sm: 'flex-end',
               lg: 'flex-end',
-
             }}}>
-        <Grid item className="formTextContainer">
+        <Grid item 
+          sx={{paddingLeft: {
+            xs: '0',
+            md: '2rem',
+            lg: '0',
+          },
+          marginLeft: {
+            // lg: '12rem'
+          }}} className="formTextContainer">
             <Controller 
               name='text'
+              
               control={control}
               defaultValue=""
               render={({field}) => (
                 <TextField
                   {...field}
                   id="outlined-basic"
+                  className="formTextField"
                   label="Card Text"
                   variant="outlined"
                   error={!!errors.text}
@@ -280,7 +301,11 @@ export default function Deck() {
               lg: 'center',
 
             }}}>
-          <Grid item className="formDefinitionContainer">
+          <Grid item sx={{paddingRight: {
+            xs: '0',
+            md: '2rem',
+            lg: '0',
+          }}} className="formDefinitionContainer">
             <Controller 
               name='definition'
               control={control}
@@ -289,6 +314,8 @@ export default function Deck() {
                 <TextField
                   {...field}
                   id="outlined-basic"
+                  className="formDefinitionField"
+
                   label="Card Definition"
                   variant="outlined"
                   error={!!errors.definition}

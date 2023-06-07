@@ -58,7 +58,7 @@
     position: absolute;
     font-size: 10px;
     top: 5px;
-    right: 5px;
+    right: 1.5%;
     background: grey;
     transform-style: preserve-3d;
     transform: rotateY(180deg);
@@ -71,10 +71,11 @@
     transform-style: preserve-3d;
     /* background: purple; */
   }
+  /** figure out how to position the flipped x button consistently at different breakpoints**/
   .cardButton.flip {
     position: absolute;
     top: 5px;
-    right: 294px;
+    right: 91%;
     transform-style: preserve-3d;
   }
   
@@ -121,6 +122,8 @@
   justify-content: center;
   gap: 1.5rem;
  
+
+ 
   }
 
   .Deck_cardContainer {
@@ -136,6 +139,8 @@
     align-items: center;
     gap:12px;
     padding: 1rem 2rem;
+    
+
 }
 
   .Deck__form {
@@ -150,10 +155,11 @@
     }
   
 
-    /**
+    
 .formInputsContainer {
 
-  .Deck__form--text {
+  //flex-grow:1;
+  /**.Deck__form--text {
     background-color: purple;
   }
 
@@ -163,26 +169,39 @@
 
   .Deck__form--submit {
    background-color: orangered;
-  }
-}**/
-
-/**
-.formTextContainer {
-  justify-content: flex-end;
-}**/
-
-/**.formDefinitionContainer {
-  justify-content: flex-;
-}**/
+  }**/
+}
 
 
-   .Deck__form--text {
+.formTextField {
+  //flex-grow: 1;
+  width: 100%
+}
+.formDefinitionField {
+  width: 100%
+}
+
+
+
+.Deck__form--text {
   
-   }
-   .Deck__form--definition {
+}
+.Deck__form--definition {
+  
+}
 
-   }
+.formTextController {
+  flex-grow: 1;
+}
 
+.formTextContainer {
+  display: flex;
+  flex-grow:1;
+}
+.formDefinitionContainer {
+  display: flex;
+  flex-grow:1;
+}
 
    .Deck__switchesContainer {
     justify-content: center;
@@ -196,4 +215,8 @@
    .Deck__switchesContainer--viewSwitch {
     justify-content: center;
 
+   }
+
+   Controller {
+    display: flex;
    }
