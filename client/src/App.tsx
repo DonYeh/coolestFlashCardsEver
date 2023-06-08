@@ -70,7 +70,7 @@ function App() {
   // xl, extra-large: 1536px.
 
   return (
-    <Grid container className="App">
+    <Grid container className="App" >
       {/* <h1>Decks</h1> */}
             {/*TODO: hide the X button until you hover over the card*/}
       <Grid item container className="App__decksContainer" spacing={2}>
