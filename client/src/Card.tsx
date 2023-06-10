@@ -21,6 +21,7 @@ return (
         // sx={{ width: {
         // xs: '80%',
         // sm: '100%'}}} 
+        // if study mode, add padding-bottom: 1rem to the text to separate from definition
         className={`cardContainer ${view == 'carousel' ? 
         'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}  
         onClick={ 
@@ -35,7 +36,7 @@ return (
             <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
                 {mode == 'study' ? 
                     <>
-                        <div className="text">
+                        <div className="text study">
                             {card?.text}
                         </div>
                         <div className="definition">

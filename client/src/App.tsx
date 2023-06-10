@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useOutletContext } from "react-router-dom";
 import { Card, Grid, CardActionArea } from '@mui/material'
+import { makeStyles } from "@mui/material/styles";
 
 type Decks = {
   title: string;
@@ -20,12 +21,23 @@ const schema = yup.object().shape({
   title: yup.string().required()
 })
 
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     "& .MuiPaper-root": {
+//       backgroundColor: "purple",
+//     }
+//   }
+// }))
+
+
 function App() {
 
   const [selectedDeck, setSelectedDeck] = useOutletContext();
 
   const [decks, setDecks] = useState<TDeck[]>([]);
   const [title, setTitle] = useState<string>('')
+
+  // const classes = useStyles();
 
   console.log('inside App, decks: ', decks)
   const {register, control, handleSubmit, setValue, formState: {errors}} = useForm<Decks>({
@@ -76,12 +88,12 @@ function App() {
       <Grid item container className="App__decksContainer" spacing={2}>
         {/* <ul className="App__decksContainer"> */}
           {decks.map((deck) => 
-          <Grid item container xs={12} sm={6} md={4} lg={3} xl={2.5} className='App__deckContainer' >
+          <Grid item container xs={12} sm={6} md={4} lg={3} xl={2.5} >
           {/* <Grid item className='App__decksCard' > */}
             {/* <li key={deck._id} className='App__decksCard'> */}
               {/* <Grid item> */}
-                <Card className="App_deckCard">
-                    <button onClick={()=> handleDeleteDeck(deck._id)} className="App_deckCard--button">X</button>
+                <Card className="App__deckCard">
+                    <button onClick={()=> handleDeleteDeck(deck._id)} className="App__deckCard--button">X</button>
                   <CardActionArea component={Link} to={`decks/${deck._id}`} className="App_cardActionArea">
                     {deck.title}
                   </CardActionArea>

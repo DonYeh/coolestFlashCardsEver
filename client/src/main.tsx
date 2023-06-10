@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import './index.css'
+import './index.scss'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
 import { Header } from './Header';
 import Deck from './Deck';
 import Layout from './Layout';
@@ -48,8 +47,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Box className="appContainer" sx={{paddingInline: {
         xs: 'max(20vw,2.5rem)', 
         sm: '2.5rem',
-        md: '3rem',
-        lg: '4rem',
+        md: '1rem',
+        lg: '3rem',
       }}} >
       <RouterProvider router={router} />
       </Box>
