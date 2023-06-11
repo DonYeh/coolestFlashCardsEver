@@ -249,7 +249,13 @@ export default function Deck() {
       }
 
 {/* //TODO: center the form container + widen the input box and create card button */}
-  <Grid item container xs={12} className="Deck__formContainer">
+  <Grid item container xs={12} className="Deck__formContainer" sx={{
+            paddingInline: {
+              sm: '2rem',
+              md: '2.5rem',
+              lg: '0',
+            }
+            }}>
       <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
         <Grid item container spacing={2} 
           sx={{
@@ -270,7 +276,7 @@ export default function Deck() {
               sm: 'flex-end',
               lg: 'flex-end',
             }}}>
-        <Grid item 
+            <Grid item 
           sx={{paddingLeft: {
             xs: '0',
             md: '2rem',
@@ -296,7 +302,7 @@ export default function Deck() {
                 />
               )}
             />
-          </Grid>
+            </Grid>
           </Grid>
           <Grid item container xs={12} sm={6} lg={4}className="Deck__form--definition Deck__formInputs"  sx={{
             justifyContent: {
@@ -305,7 +311,7 @@ export default function Deck() {
               lg: 'center',
 
             }}}>
-          <Grid item sx={{paddingRight: {
+            <Grid item sx={{paddingRight: {
             xs: '0',
             md: '2rem',
             lg: '0',
@@ -335,23 +341,34 @@ export default function Deck() {
               lg: 'flex-start',
 
             }}}>
-              <Grid item>
-            <Button component="button"variant="contained" type="submit">Create Card</Button>
+            <Grid item>
+              <Button component="button"variant="contained" type="submit">Create Card</Button>
             </Grid>
           </Grid>
         </Grid>
       </form>
+      
     </Grid>
-      <Grid item container xs={12} className="Deck__switchesContainer">
+      <Grid item container xs={12} className="Deck__switchesContainer" spacing={1} sx={{paddingTop: { xs: '.75rem', sm: 0, lg: '.5rem'}}}>
         <Grid item xs={12} sm={6} >
-          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--modeSwitch">
+          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--modeSwitch" sx={{ justifyContent: {
+            sm: 'flex-end'
+            },
+            paddingRight: {
+              sm: '4rem'
+            }}}>
             <Typography>Study</Typography>
             <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleModeSwitch} checked={mode == 'study' ? false : true}/>
             <Typography>Quiz</Typography>
           </Stack>
         </Grid>
         <Grid item xs={12} sm={6} >
-          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--viewSwitch">
+          <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--viewSwitch" sx={{ justifyContent: {
+            sm: 'flex-start'
+            },
+            paddingLeft: {
+              sm: '4rem'
+            }}}>
             <Typography>Grid</Typography>
             <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onChange={handleViewSwitch} checked={view == 'carousel' ? true : false}/>
             <Typography>Carousel</Typography>

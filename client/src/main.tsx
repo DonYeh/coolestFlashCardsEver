@@ -46,9 +46,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ThemeProvider theme={theme}>
       <Box className="appContainer" sx={{paddingInline: {
         xs: 'max(20vw,2.5rem)', 
-        sm: '2.5rem',
-        md: '1rem',
-        lg: '3rem',
+        sm: '.5rem',
+        // md: '1rem',
+        // lg: '3rem',
       }}} >
       <RouterProvider router={router} />
       </Box>

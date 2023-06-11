@@ -42,11 +42,6 @@
     } 
   }
 
-  /**
-  .cardContainer:hover + .cardButton {
-    background-color: red;
-  }**/
-
 
   .cardContainer.carousel {
     width: 653px;
@@ -87,8 +82,7 @@
     top: .2rem;
     z-index: 50;
   }
-  
-  /** figure out how to position the flipped x button consistently at different breakpoints**/
+
   .cardButton.flip {
     /**position: absolute;
     top: 5px;
@@ -177,7 +171,7 @@
     justify-content: center;
     align-items: center;
     gap:12px;
-    padding: 1rem 2rem;
+    padding-top: 1rem;
     
 
 }
@@ -244,6 +238,7 @@
 
    .Deck__switchesContainer {
     justify-content: center;
+    padding: .75rem 0 3rem;
    }
 
    .Deck__switchesContainer--modeSwitch {
