@@ -1,5 +1,11 @@
 import { useState } from "react";
 import './cardslider.css'
+import { Box } from  '@mui/material';
+
+// import useMediaQuery from '@mui/material/useMediaQuery';
+// import { useTheme } from '@mui/material/styles';
+
+
 import Typography from '@mui/material/Typography';
 import Card from './Card';
 import CSS from 'csstype';
@@ -7,6 +13,10 @@ import CSS from 'csstype';
 const sliderStyles: CSS.Properties = {
   position: "relative",
   height: "100%",
+  //media query here to show 88% at sm size
+  // @media (min-width: 600px) {
+  //   backgroundColor: "blue"
+  // }
 };
 
 const slideStyles: CSS.Properties = {
@@ -27,7 +37,7 @@ const slideStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
-    right: "-33px",
+    right: "-50px",
     fontSize: "60px",
     color: "#1976d2",
     zIndex: 1,
@@ -43,7 +53,7 @@ const slideStyles: CSS.Properties = {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
-    left: "-33px",
+    left: "-50px",
     fontSize: "60px",
     color: "#1976d2",
     zIndex: 1,
@@ -70,6 +80,10 @@ const slideStyles: CSS.Properties = {
 }
 
 function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, handleFlip, handleDeleteCard, mode, setCurrentIndex, view}: CardSliderProps) {
+  
+  // const theme = useTheme();
+  // const matches = useMediaQuery(theme.breakpoints.down('md'));
+  
   //TODO: flip the previous card back to front when going to next card
   const goToPrevious = () => {
       const isFirstSlide = currentIndex === 0;
@@ -99,22 +113,31 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
     console.log('CardSlider, currentIndex: ', currentIndex)
   
     return (
-      <div style={sliderStyles}>
-        <div>
+      <Box style={sliderStyles} sx={{width: {
+        xs: '100%',
+        sm: '80%',
+        md: '100%'
+      } }}>
+        {/* <div>
           <div onClick={goToPrevious} style={leftArrowStyles}>
             ❰
           </div>
           <div onClick={goToNext} style={rightArrowStyles}>
             ❱
           </div>
-        </div>
-        <div style={slideStyles}>        
+        </div> */}
+        <div style={slideStyles}>
+        {/* <div onClick={goToPrevious} style={leftArrowStyles}>
+            ❰
+          </div>   */}
             <Card 
                 card={cards[currentIndex]}
                 cardBack={cardBack} 
                 cardFront={cardFront}
                 cardId={currentIndex} 
-                flippedCard={flippedCard} 
+                flippedCard={flippedCard}
+                goToNext={goToNext} 
+                goToPrevious={goToPrevious} 
                 //why does handleDeleteCard not work in carousel view???? 
                 // handleDeleteCard={() => handleDeleteCard(cards[currentIndex]._id)}
                 // handleDeleteCard={()=>handleDeleteCard(currentIndex)}
@@ -126,6 +149,9 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
                 mode={mode}
                 view={view}
             />
+            {/* <div onClick={goToNext} style={rightArrowStyles}>
+            ❱
+          </div> */}
         </div>
         <div style={dotsContainerStyles}>
           {cards.map((card, cardIndex) => (
@@ -140,7 +166,7 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
             </div>
           ))}
         </div>
-      </div>
+      </Box>
     );
 }
 

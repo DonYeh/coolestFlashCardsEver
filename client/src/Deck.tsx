@@ -214,7 +214,7 @@ export default function Deck() {
     }}}>
       
       {view == 'grid' ? 
-  <Grid item container className="Deck_cardsContainer"  >
+      <Grid item container className="Deck_cardsContainer">
         
         {cards.map((card, cardId) => 
 
@@ -232,20 +232,21 @@ export default function Deck() {
               />
           </Grid>
           )}
-  </Grid>
-        :
-        <CardSlider 
-          cards={cards}
-          cardBack={cardBack} 
-          cardFront={cardFront} 
-          flippedCard={flippedCard}  
-          handleFlip={handleFlip} 
-          handleDeleteCard={handleDeleteCard} 
-          mode={mode} 
-          view={view}
-          currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
-        />
+      </Grid>
+      :
+      <CardSlider 
+        cards={cards}
+        cardBack={cardBack} 
+        cardFront={cardFront}
+        className="Deck_carouselContainer" 
+        flippedCard={flippedCard}  
+        handleFlip={handleFlip} 
+        handleDeleteCard={handleDeleteCard} 
+        mode={mode} 
+        view={view}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+      />
       }
 
 {/* //TODO: center the form container + widen the input box and create card button */}

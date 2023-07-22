@@ -1,5 +1,33 @@
 import { useEffect, useState, useRef } from 'react';
+import CSS from 'csstype';
 // import { flippedCardStatus } from './Deck';
+
+    const rightArrowStyles: CSS.Properties = {
+    position: "absolute",
+    top: "50%",
+    transform: "translate(0, -50%)",
+    right: "-50px",
+    fontSize: "60px",
+    color: "#1976d2",
+    zIndex: 1,
+    cursor: "pointer",
+    
+    // hover: {
+    // "&:hover": {
+    //   color:"purple",
+    // }}
+  };
+  
+  const leftArrowStyles: CSS.Properties = {
+    position: "absolute",
+    top: "50%",
+    transform: "translate(0, -50%)",
+    left: "-50px",
+    fontSize: "60px",
+    color: "#1976d2",
+    zIndex: 1,
+    cursor: "pointer",
+  };
 
 type CardProps = {
     card: {text: string; definition: string; _id: number};
@@ -7,13 +35,20 @@ type CardProps = {
     cardFront: {current: string};
     cardId: number;
     flippedCard: {[cardId: number]: boolean};
+    goToNext: () => void;
+    goToPrevious: () => void;
     handleDeleteCard: (cardId: number) => void;
     handleFlip: (cardId: number, reset?: boolean) => void;
     mode?: string | null;
     view?: string | null;
 }
 
-export default function Card({ card, cardBack, cardFront, cardId, flippedCard, handleDeleteCard, handleFlip, mode, view }: CardProps) {
+//TODO: align the left/right arrows at all breakpoints
+
+export default function Card({ card, cardBack, cardFront, cardId, flippedCard, goToNext, goToPrevious, handleDeleteCard, handleFlip, mode, view }: CardProps) {
+
+    console.log('mode: ', mode)
+    console.log('view: ', view)
     
 return (
     <div 
@@ -28,6 +63,13 @@ return (
             () => handleFlip(cardId)}
            
             >
+{ view === 'carousel' && <div onClick={goToNext} style={rightArrowStyles}>
+            ❱
+          </div> }
+        {/* <div onClick={goToNext} style={rightArrowStyles}>
+            ❱
+          </div> */}
+
         <button 
             className={`cardButton ${view == 'carousel' ? 
             'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}     
@@ -55,6 +97,13 @@ return (
                 </div>
             </div>
         </div>
+{ view === 'carousel' && <div onClick={goToPrevious} style={leftArrowStyles}>
+        ❰
+        </div> }
+        {/* <div onClick={goToPrevious} style={leftArrowStyles}>
+        ❰
+        </div>  */}
+
     </div>
 )
 
