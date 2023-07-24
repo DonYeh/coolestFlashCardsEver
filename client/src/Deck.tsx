@@ -246,34 +246,39 @@ export default function Deck() {
       }
 
 {/* //TODO: center the form container + widen the input box and create card button */}
-      <Grid item container xs={12} className="Deck__formContainer" sx={{
+<form onSubmit={handleSubmit(cardSubmitHandler)} className="Deck__form">
+      <Grid item container xs={12} className="Deck__formContainer" 
+          sx={{
             paddingInline: {
               sm: '2rem',
               md: '2.5rem',
+              lg: '3rem'
              
             }
-            }}>
-              <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
+            }}
+            >
           <Grid item container spacing={2} 
             sx={{
-              paddingInline: {
+                paddingInline: {
                 md:'3rem',
                 lg: '0',
               },
-              marginLeft: {
-                lg: 'max(5rem,11.5vw)',
-                xl: 'max(7rem,16vw)'
-              }}}
+              // marginLeft: {
+              //     lg: 'max(5rem,11.5vw)',
+              //   xl: 'max(7rem,16vw)'
+              // }
+            }}
             className="formInputsContainer">
             <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" 
             sx={{
               justifyContent: {
                 xs: 'center',
                 sm: 'flex-end',
-                lg: 'flex-end',
+                lg: 'center',
               }}}>
               <Grid item 
-            sx={{paddingLeft: {
+            sx={{
+              paddingLeft: {
               xs: '0',
               md: '2rem',
               lg: '0',
@@ -334,16 +339,22 @@ export default function Deck() {
             <Grid item container xs={12} lg={4} className="Deck__form--submit Deck__formInputs" sx={{
               justifyContent: {
                 xs: 'center',
-                lg: 'flex-start',
+                // lg: 'flex-start',
 
               }}}>
-              <Grid item>
-                <Button component="button"variant="contained" type="submit">Create Card</Button>
+              <Grid item className="Deck__form--submit" sx={{
+                paddingInline: {
+              xs: '0',
+              md: '2rem',
+              lg: '0',
+            }
+            }} >
+                <Button component="button"variant="contained" type="submit" className="formInputsButton">Create Card</Button>
               </Grid>
             </Grid>
           </Grid>
-        </form>
       </Grid>
+</form>
       <Grid item container xs={12} className="Deck__switchesContainer" spacing={1} sx={{paddingTop: { xs: '.75rem', sm: 0, lg: '.5rem'}}}>
         <Grid item xs={12} sm={6} >
           <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--modeSwitch" sx={{ justifyContent: {
