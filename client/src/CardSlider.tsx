@@ -25,7 +25,7 @@ const slideStyles: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
     borderRadius: "10px",
- 
+
   };
 
   const cardStyle: CSS.Properties = {
@@ -33,37 +33,38 @@ const slideStyles: CSS.Properties = {
     height: "400px",
   }
   //TODO: add hover to right and left arrows
-  const rightArrowStyles: CSS.Properties = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0, -50%)",
-    right: "-50px",
-    fontSize: "60px",
-    color: "#1976d2",
-    zIndex: 1,
-    cursor: "pointer",
+  // const rightArrowStyles: CSS.Properties = {
+  //   position: "absolute",
+  //   top: "50%",
+  //   transform: "translate(0, -50%)",
+  //   right: "-50px",
+  //   fontSize: "60px",
+  //   color: "#1976d2",
+  //   zIndex: 1,
+  //   cursor: "pointer",
     
-    // hover: {
-    // "&:hover": {
-    //   color:"purple",
-    // }}
-  };
+  //   // hover: {
+  //   // "&:hover": {
+  //   //   color:"purple",
+  //   // }}
+  // };
   
-  const leftArrowStyles: CSS.Properties = {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(0, -50%)",
-    left: "-50px",
-    fontSize: "60px",
-    color: "#1976d2",
-    zIndex: 1,
-    cursor: "pointer",
-  };
+  // const leftArrowStyles: CSS.Properties = {
+  //   position: "absolute",
+  //   top: "50%",
+  //   transform: "translate(0, -50%)",
+  //   left: "-50px",
+  //   fontSize: "60px",
+  //   color: "#1976d2",
+  //   zIndex: 1,
+  //   cursor: "pointer",
+  // };
   
   
   const dotsContainerStyles: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
+    paddingTop: "1rem",
   };
   
   type CardSliderProps = {
@@ -116,8 +117,9 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
       <Box style={sliderStyles} sx={{width: {
         xs: '100%',
         sm: '80%',
-        md: '100%'
-      } }}>
+        md: '60%',
+        lg: '50%'
+      }}}>
         {/* <div>
           <div onClick={goToPrevious} style={leftArrowStyles}>
             ❰
@@ -126,7 +128,7 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
             ❱
           </div>
         </div> */}
-        <div style={slideStyles}>
+        <Box style={slideStyles}>
         {/* <div onClick={goToPrevious} style={leftArrowStyles}>
             ❰
           </div>   */}
@@ -152,10 +154,10 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
             {/* <div onClick={goToNext} style={rightArrowStyles}>
             ❱
           </div> */}
-        </div>
-        <div style={dotsContainerStyles}>
+        </Box>
+        <Box style={dotsContainerStyles}>
           {cards.map((card, cardIndex) => (
-            <div
+            <Box
               className={cardIndex === currentIndex ? "dotStyle active" : "dotStyle"}
               key={cardIndex}
               onClick={() => {
@@ -163,9 +165,9 @@ function CardSlider({cards, cardBack, cardFront, currentIndex, flippedCard, hand
                 goToSlide(cardIndex)}}
             >
                 ●
-            </div>
+            </Box>
           ))}
-        </div>
+        </Box>
       </Box>
     );
 }

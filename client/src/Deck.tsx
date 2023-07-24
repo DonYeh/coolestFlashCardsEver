@@ -207,14 +207,10 @@ export default function Deck() {
 
 
   return (
-    <Grid container className="Deck" sx={{padding: {
-      xs: '0rem',
-      sm: '0rem', 
-      md: '0rem',
-    }}}>
+    <Grid container className="Deck">
       
       {view == 'grid' ? 
-      <Grid item container className="Deck_cardsContainer">
+      <Grid item container className="Deck_cardsContainer" >
         
         {cards.map((card, cardId) => 
 
@@ -250,106 +246,104 @@ export default function Deck() {
       }
 
 {/* //TODO: center the form container + widen the input box and create card button */}
-  <Grid item container xs={12} className="Deck__formContainer" sx={{
+      <Grid item container xs={12} className="Deck__formContainer" sx={{
             paddingInline: {
               sm: '2rem',
               md: '2.5rem',
-              lg: '0',
+             
             }
             }}>
-      <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
-        <Grid item container spacing={2} 
-          sx={{
-            paddingInline: {
-              md:'3rem',
+              <form className="Deck__form" onSubmit={handleSubmit(cardSubmitHandler)}>
+          <Grid item container spacing={2} 
+            sx={{
+              paddingInline: {
+                md:'3rem',
+                lg: '0',
+              },
+              marginLeft: {
+                lg: 'max(5rem,11.5vw)',
+                xl: 'max(7rem,16vw)'
+              }}}
+            className="formInputsContainer">
+            <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" 
+            sx={{
+              justifyContent: {
+                xs: 'center',
+                sm: 'flex-end',
+                lg: 'flex-end',
+              }}}>
+              <Grid item 
+            sx={{paddingLeft: {
+              xs: '0',
+              md: '2rem',
               lg: '0',
             },
-            
-        marginLeft: {
-          lg: 'max(5rem,11.5vw)',
-          xl: 'max(7rem,16vw)'
-        }}}
-          className="formInputsContainer">
-          <Grid item container xs={12} sm={6}  lg={4}className="Deck__form--text Deck__formInputs" 
-          sx={{
-            justifyContent: {
-              xs: 'center',
-              sm: 'flex-end',
-              lg: 'flex-end',
-            }}}>
-            <Grid item 
-          sx={{paddingLeft: {
-            xs: '0',
-            md: '2rem',
-            lg: '0',
-          },
-          marginLeft: {
-            // lg: '12rem'
-          }}} className="formTextContainer">
-            <Controller 
-              name='text'
-              
-              control={control}
-              defaultValue=""
-              render={({field}) => (
-                <TextField
-                  {...field}
-                  id="outlined-basic"
-                  className="formTextField"
-                  label="Card Text"
-                  variant="outlined"
-                  error={!!errors.text}
-                  helperText={errors.text ? errors.text?.message : ''}
-                />
-              )}
-            />
+            marginLeft: {
+              // lg: '12rem'
+            }}} className="formTextContainer">
+              <Controller 
+                name='text'
+                
+                control={control}
+                defaultValue=""
+                render={({field}) => (
+                  <TextField
+                    {...field}
+                    id="outlined-basic"
+                    className="formTextField"
+                    label="Card Text"
+                    variant="outlined"
+                    error={!!errors.text}
+                    helperText={errors.text ? errors.text?.message : ''}
+                  />
+                )}
+              />
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} sm={6} lg={4}className="Deck__form--definition Deck__formInputs"  sx={{
+              justifyContent: {
+                xs: 'center',
+                sm: 'flex-start',
+                lg: 'center',
+
+              }}}>
+              <Grid item sx={{paddingRight: {
+              xs: '0',
+              md: '2rem',
+              lg: '0',
+            }}} className="formDefinitionContainer">
+              <Controller 
+                name='definition'
+                control={control}
+                defaultValue=""
+                render={({field}) => (
+                  <TextField
+                    {...field}
+                    id="outlined-basic"
+                    className="formDefinitionField"
+
+                    label="Card Definition"
+                    variant="outlined"
+                    error={!!errors.definition}
+                    helperText={errors.definition ? errors.definition?.message : ''}
+                  />
+                )}
+              />
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} lg={4} className="Deck__form--submit Deck__formInputs" sx={{
+              justifyContent: {
+                xs: 'center',
+                lg: 'flex-start',
+
+              }}}>
+              <Grid item>
+                <Button component="button"variant="contained" type="submit">Create Card</Button>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid item container xs={12} sm={6} lg={4}className="Deck__form--definition Deck__formInputs"  sx={{
-            justifyContent: {
-              xs: 'center',
-              sm: 'flex-start',
-              lg: 'center',
-
-            }}}>
-            <Grid item sx={{paddingRight: {
-            xs: '0',
-            md: '2rem',
-            lg: '0',
-          }}} className="formDefinitionContainer">
-            <Controller 
-              name='definition'
-              control={control}
-              defaultValue=""
-              render={({field}) => (
-                <TextField
-                  {...field}
-                  id="outlined-basic"
-                  className="formDefinitionField"
-
-                  label="Card Definition"
-                  variant="outlined"
-                  error={!!errors.definition}
-                  helperText={errors.definition ? errors.definition?.message : ''}
-                />
-              )}
-            />
-            </Grid>
-          </Grid>
-          <Grid item container xs={12} lg={4} className="Deck__form--submit Deck__formInputs" sx={{
-            justifyContent: {
-              xs: 'center',
-              lg: 'flex-start',
-
-            }}}>
-            <Grid item>
-              <Button component="button"variant="contained" type="submit">Create Card</Button>
-            </Grid>
-          </Grid>
-        </Grid>
-      </form>
-      
-    </Grid>
+        </form>
+      </Grid>
       <Grid item container xs={12} className="Deck__switchesContainer" spacing={1} sx={{paddingTop: { xs: '.75rem', sm: 0, lg: '.5rem'}}}>
         <Grid item xs={12} sm={6} >
           <Stack direction="row" spacing={1} alignItems="center" className="Deck__switchesContainer--modeSwitch" sx={{ justifyContent: {

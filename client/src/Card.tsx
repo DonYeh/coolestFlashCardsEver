@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import CSS from 'csstype';
+import { Box } from  '@mui/material';
+
 // import { flippedCardStatus } from './Deck';
 
     const rightArrowStyles: CSS.Properties = {
@@ -54,7 +56,7 @@ export default function Card({ card, cardBack, cardFront, cardId, flippedCard, g
     console.log('flippedCard: ', flippedCard)
     
 return (
-    <div 
+    <Box 
         // convert this div to a Grid component
         // sx={{ width: {
         // xs: '80%',
@@ -66,44 +68,44 @@ return (
             () => handleFlip(cardId)}
            
             >
-        { view === 'carousel' && <div className="cardContainerRightArrow" onClick={flippedCard[cardId] === true ? goToPrevious : goToNext} style={rightArrowStyles}>
+        { view === 'carousel' && <Box className="cardContainerRightArrow" onClick={flippedCard[cardId] === true ? goToPrevious : goToNext} style={rightArrowStyles}>
             ❱
-        </div> }
+        </Box> }
         
 
         <button 
             className={`cardButton ${view == 'carousel' ? 
             'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}     
             onClick={()=> handleDeleteCard(cardId)}>X</button>
-        <div className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
-            <div className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
+        <Box className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
+            <Box className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
                 {mode == 'study' ? 
                     <>
-                        <div className="text study">
+                        <Box className="text study">
                             {card?.text}
-                        </div>
-                        <div className="definition">
+                        </Box>
+                        <Box className="definition">
                             {card?.definition}
-                        </div>
+                        </Box>
                     </>
                     :
-                        <div className="text">
+                        <Box className="text">
                           {card?.text}
-                        </div> 
+                        </Box> 
                 }
-            </div>
-            <div className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
-                <div className="cardBack">
+            </Box>
+            <Box className={`back ${flippedCard[cardId] ? '' : 'hidden'}`} ref={cardBack}>
+                <Box className="cardBack">
                     {card.definition}
-                </div>
-            </div>
-        </div>
-        { view === 'carousel' && <div onClick={flippedCard[cardId] === true ? goToNext : goToPrevious} style={leftArrowStyles}>
+                </Box>
+            </Box>
+        </Box>
+        { view === 'carousel' && <Box onClick={flippedCard[cardId] === true ? goToNext : goToPrevious} style={leftArrowStyles}>
             ❰
-        </div> }
+        </Box> }
         
 
-    </div>
+    </Box>
 )
 
 } 
