@@ -108,14 +108,16 @@ function App() {
           <Grid container spacing={2} >
             <Grid item xs={12} sm={6}>
               <Controller 
-                name='title' 
+                name='title'
+                 
                 control={control} 
                 defaultValue=""
                 render={({field}) => (
                   <TextField 
                     {...field}
                     id="outlined-basic" 
-                    label="Deck Title"  
+                    label="Deck Title" 
+                    fullWidth 
                     variant="outlined" 
                     error={!!errors.title} 
                     helperText={errors.title ? errors.title?.message : ''}
@@ -124,7 +126,17 @@ function App() {
               />
             </Grid>
             {/* TODO: add media query for TextField and Button to widen and padding top/bottom at xs breakpoint */}
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} className="App__form--buttonContainer" sx={{
+            paddingInline: {
+              // sm: '2rem',
+              // md: '2.5rem',
+              // lg: '3.5rem'
+             
+            },
+            paddingTop: {
+              sm: '0rem'
+            }
+            }}>
               <Button component="button"variant="contained" type="submit" >Create Deck</Button>
             </Grid>
           </Grid>

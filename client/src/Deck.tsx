@@ -252,7 +252,7 @@ export default function Deck() {
             paddingInline: {
               sm: '2rem',
               md: '2.5rem',
-              lg: '3rem'
+              lg: '3.5rem'
              
             }
             }}

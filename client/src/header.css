@@ -13,6 +13,10 @@
     color: black;
     justify-content: start;
 }
+.toolbar--selectDeck {
+    width: 23%;
+    margin-block: .4rem;
+}
 
 /* .toolbar--selectDeck {
     justify-content: center;

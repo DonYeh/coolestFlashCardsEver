@@ -54,8 +54,9 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
-  color: teal;
+  // border-color: #646cff;
+  border-color: rgb(25, 118, 210);
+  color: rgb(25, 118, 210);
 
 }
 button:focus,
@@ -69,7 +70,8 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    // color: #747bff;
+    color: rgb(25, 118, 210);
   }
   button {
     background-color: #f9f9f9;
@@ -78,7 +80,7 @@ button:focus-visible {
 
 .appContainer {
     /* background-color: red; */
-    color: teal;
+    // color: teal;
     width: 100%;
     box-sizing: border-box;
     padding-top: 3.5rem;
