@@ -8,8 +8,8 @@ import { Box } from  '@mui/material';
     position: "absolute",
     // top: "50%",
     // transform: "translate(0, -50%)",
-    right: "-50px",
-    fontSize: "60px",
+    // right: "-3.125rem",
+    // fontSize: "3.75rem",
     color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
@@ -26,8 +26,8 @@ import { Box } from  '@mui/material';
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
-    left: "-50px",
-    fontSize: "60px",
+    // left: "-3.125rem",
+    // fontSize: "3.75rem",
     color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
@@ -68,7 +68,7 @@ return (
             () => handleFlip(cardId)}
            
             >
-        { view === 'carousel' && <Box className="cardContainerRightArrow" onClick={flippedCard[cardId] === true ? goToPrevious : goToNext} style={rightArrowStyles}>
+        { view === 'carousel' && <Box className="cardContainerRightArrow" onClick={flippedCard[cardId] === true ? goToPrevious : goToNext} style={rightArrowStyles} sx={{fontSize: { xs: "3rem", sm: "3.75rem", md: "5rem", lg: "6rem"}, right: {xs: "-3.125rem", md: "-5rem", lg: "-6rem" }}}>
             ❱
         </Box> }
         
@@ -100,7 +100,7 @@ return (
                 </Box>
             </Box>
         </Box>
-        { view === 'carousel' && <Box onClick={flippedCard[cardId] === true ? goToNext : goToPrevious} style={leftArrowStyles}>
+        { view === 'carousel' && <Box onClick={flippedCard[cardId] === true ? goToNext : goToPrevious} style={leftArrowStyles} sx={{fontSize: { xs: "3rem", sm: "3.75rem", md: "5rem", lg: "6rem"}, left: {xs: "-3.125rem", md: "-5rem", lg: "-6rem" }}}>
             ❰
         </Box> }
         
