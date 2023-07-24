@@ -4,13 +4,15 @@ import CSS from 'csstype';
 
     const rightArrowStyles: CSS.Properties = {
     position: "absolute",
-    top: "50%",
-    transform: "translate(0, -50%)",
+    // top: "50%",
+    // transform: "translate(0, -50%)",
     right: "-50px",
     fontSize: "60px",
     color: "#1976d2",
     zIndex: 1,
     cursor: "pointer",
+   
+    // transform: "none",
     
     // hover: {
     // "&:hover": {
@@ -43,12 +45,13 @@ type CardProps = {
     view?: string | null;
 }
 
-//TODO: align the left/right arrows at all breakpoints
+//TODO: align the left/right arrows at all breakpoints, when card is flipped, the arrows also flip. try to get it so that the arrows don't flip with the card
 
 export default function Card({ card, cardBack, cardFront, cardId, flippedCard, goToNext, goToPrevious, handleDeleteCard, handleFlip, mode, view }: CardProps) {
 
     console.log('mode: ', mode)
     console.log('view: ', view)
+    console.log('flippedCard: ', flippedCard)
     
 return (
     <div 
@@ -63,12 +66,10 @@ return (
             () => handleFlip(cardId)}
            
             >
-{ view === 'carousel' && <div onClick={goToNext} style={rightArrowStyles}>
+        { view === 'carousel' && <div className="cardContainerRightArrow" onClick={flippedCard[cardId] === true ? goToPrevious : goToNext} style={rightArrowStyles}>
             ❱
-          </div> }
-        {/* <div onClick={goToNext} style={rightArrowStyles}>
-            ❱
-          </div> */}
+        </div> }
+        
 
         <button 
             className={`cardButton ${view == 'carousel' ? 
@@ -97,12 +98,10 @@ return (
                 </div>
             </div>
         </div>
-{ view === 'carousel' && <div onClick={goToPrevious} style={leftArrowStyles}>
-        ❰
+        { view === 'carousel' && <div onClick={flippedCard[cardId] === true ? goToNext : goToPrevious} style={leftArrowStyles}>
+            ❰
         </div> }
-        {/* <div onClick={goToPrevious} style={leftArrowStyles}>
-        ❰
-        </div>  */}
+        
 
     </div>
 )

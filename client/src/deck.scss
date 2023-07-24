@@ -48,12 +48,21 @@
     height: 435px;  
   }
 
+  .cardContainer.carousel.flip {
+    transform-style: preserve-3d;
+    color: orange;
+  }
+
   .cardContainer.flip {
     position: relative;
     --rotate-y: 180deg;
     transition: 200ms;
   }
 
+  .cardContainerRightArrow {
+    color: pink;
+    transform: none;
+  }
   
   .cardContainer .front,
   .cardContainer .back {
