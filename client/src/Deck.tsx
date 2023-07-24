@@ -339,7 +339,6 @@ export default function Deck() {
             <Grid item container xs={12} lg={4} className="Deck__form--submit Deck__formInputs" sx={{
               justifyContent: {
                 xs: 'center',
-                // lg: 'flex-start',
 
               }}}>
               <Grid item className="Deck__form--submit" sx={{

@@ -77,7 +77,7 @@ return (
             className={`cardButton ${view == 'carousel' ? 
             'carousel': ''} ${flippedCard[cardId] ? 'flip' : ''}`}     
             onClick={()=> handleDeleteCard(cardId)}>X</button>
-        <Box className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} >
+        <Box className={`cardDiv ${flippedCard[cardId] ? 'flip' : ''}`} sx={view == 'carousel'? {fontSize: {xs: '1.5rem', sm: '2rem', md: '2.5rem', lg: '3.5rem'}}:{}}>
             <Box className={`front ${flippedCard[cardId] ? 'hidden' : ''}`} ref={cardFront}> 
                 {mode == 'study' ? 
                     <>
